@@ -2,10 +2,41 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title></title>
+		<script type="text/javascript">
+			(function(doc, win){
+				var docEle = doc.documentElement;
+				var resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize';
+				var reScale = function() {
+					var clientWidth = docEle.clientWidth;
+					if(!clientWidth) return;
+					docEle.style.fontSize = 16 * (clientWidth / 320) + 'px';
+				};
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvent, reScale, false);
+				doc.addEventListener('DOMContentLoaded', reScale, false);
+			})(document, window)
+		</script>
 	</head>
 	<body>
+	<section id="app">
+		<button @click="show = !show">toggle</button>
+		<transition
+			@before-enter="beforeEnter"
+			@enter="enter"
+			@leave="leave"
+			:css="false"
+		>
+			<p v-if="show">Show time!</p>
+		</transition>
+
+	</section>
 		
-		<script src="/assets/bundle.js"></script>
+		
+		
 	</body>
+	<script src="/assets/js/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+	<script src="/assets/bundle.js"></script>
 </html>

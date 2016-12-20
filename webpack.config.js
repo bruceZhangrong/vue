@@ -6,8 +6,8 @@ module.exports = {
 	//entry
 	entry: {
 		index: [
-			'webpack-dev-server/client?http://localhost:8000',
-			'webpack/hot/only-dev-server',
+			'webpack-dev-server/client?http://localhost:3000',
+            'webpack/hot/only-dev-server',
 			'./src/js/app'
 		]
 	},
@@ -18,7 +18,7 @@ module.exports = {
 	 * }
 	 * */
 	devtool: 'false',
-	//输入
+	//输出
 	output: {
 		path: __dirname,
 		filename: './assets/bundle.js'
@@ -31,7 +31,10 @@ module.exports = {
 	//其他配置方案
 	resolve: {
 		modulesDirectories: ['node_modules'],
-		extensions: ['', '.js', '.jsx', '.json', '.css', '.scss', '.less']
+		extensions: ['', '.js', '.jsx', '.json', '.css', '.scss', '.less'],
+//		alias: {
+//			'vue$': 'vue/dist/vue.js'
+//		}
 	},
 	//外部引入简化打包体积
 	/*externals: {
