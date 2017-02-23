@@ -20,23 +20,13 @@
 		</script>
 	</head>
 	<body>
-	<section id="app">
-		<button @click="show = !show">toggle</button>
-		<transition
-			@before-enter="beforeEnter"
-			@enter="enter"
-			@leave="leave"
-			:css="false"
-		>
-			<p v-if="show">Show time!</p>
-		</transition>
-
-	</section>
-		
-		
-		
+		<div id="home">
+			<router-view></router-view>
+		</div>
 	</body>
-	<script src="/assets/js/vue.js"></script>
+	<script src="//cdn.bootcss.com/vue/2.1.6/vue.min.js"></script>
+	<!-- <script src="/assets/js/vue.js"></script> -->
+	<script src="/assets/js/vue-router.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 	<script src="/assets/bundle.js"></script>
 </html>

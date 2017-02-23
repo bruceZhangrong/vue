@@ -1,5 +1,5 @@
 {
-  "name": "vue",
+  "name": "vuejs",
   "version": "1.0.0",
   "description": "a test progrom",
   "main": "index.js",
@@ -18,7 +18,12 @@
   "bugs": {
     "url": "https://github.com/bruceZhangrong/vue/issues"
   },
-  "homepage": "https://github.com/bruceZhangrong/vue#readme",
+  "dependencies": {
+    "vue": "^2.5.1",
+    "vue-router": "^2.1.1",
+    "vuex": "^2.1.1",
+    "vue-template-compiler": "^2.1.6"
+  },
   "devDependencies": {
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",
@@ -30,12 +35,10 @@
     "jquery": "^3.1.1",
     "json-loader": "^0.5.4",
     "node-sass": "^3.13.0",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "react-hot-loader": "^1.3.1",
     "sass": "^0.5.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "vue-loader": "^10.0.2",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   }

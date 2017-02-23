@@ -8,7 +8,7 @@ module.exports = {
 		index: [
 			'webpack-dev-server/client?http://localhost:3000',
             'webpack/hot/only-dev-server',
-			'./src/js/app'
+			'./src/main'
 		]
 	},
 	/*
@@ -31,28 +31,34 @@ module.exports = {
 	//其他配置方案
 	resolve: {
 		modulesDirectories: ['node_modules'],
-		extensions: ['', '.js', '.jsx', '.json', '.css', '.scss', '.less'],
-//		alias: {
-//			'vue$': 'vue/dist/vue.js'
-//		}
+		extensions: ['', '.js', '.jsx', '.json', '.css', '.scss', '.less','.vue'],
+		alias: {
+			vue: 'vue/dist/vue.js',
+            vueRouter: 'vue-router/dist/vue-router.js'
+		}
 	},
 	//外部引入简化打包体积
-	/*externals: {
-		'react': 'React',
-		'react-dom': 'ReactDom',
-		'react-router': 'ReactRouter',
-		'jquery': 'jQuery',
-		'immutable': 'Immutable',
-		'echarts': 'echarts'
-	},*/
+	externals: {
+		'vue': 'Vue'
+		// 'react-dom': 'ReactDom',
+		// 'react-router': 'ReactRouter',
+		// 'jquery': 'jQuery',
+		// 'immutable': 'Immutable',
+		// 'echarts': 'echarts'
+	},
 	//加载器loader
 	module: {
 		noParse: [],
 		loaders: [
 			{
 				test: /.\js[x]?$/,
-				loaders: ['react-hot-loader', 'babel?presets[]=es2015&presets[]=react&presets[]=stage-1'],
-				include: path.join(__dirname, 'src/js')
+				loaders: ['babel?presets[]=es2015&presets[]=stage-1'],
+				include: path.join(__dirname, 'src/')
+			},
+			{
+				test: /.\vue$/,
+				loader: 'vue-loader',
+				include: path.join(__dirname, 'src')
 			},
 			{
 				test: /\.json$/,
