@@ -1,0 +1,124 @@
+
+@import '../common/common';
+.wrap {
+	font-size: 14px;
+	background: url('../../images/loginBg1.jpg') no-repeat center/contain;
+	position: relative;
+	z-index: 999;
+	.cover {
+		background: rgba(255,255,255,.5);
+		top: 0;
+		left: 0;
+	}
+	.content {
+		z-index: 1001;
+		.close {
+			float: right;
+			margin-right: 5%;
+			font-size: 40px;
+			line-height: 40px;
+		}
+		.login-main {
+			padding-top: 5%;
+			width: 100%;
+			img {
+				width: 40%;
+				margin: 0 auto;
+			}
+			.login-account {
+				margin-top: 50px;
+				padding: $defaultPadding;
+				width: 100%;
+				box-sizing: border-box;
+				label {
+					position: relative;
+					display: block;
+				}
+				input {
+					background-color: rgba(0,0,0,.3);
+					padding-left: 40px;
+				}
+				label:first-child {
+					margin-bottom: 1px;
+				}
+				label:before {
+					content: '';
+					display: block;
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 40px;
+					height: 40px;
+				}
+				label:first-child:before {
+					background: rgba(0,0,0,.5) url(../../images/user-no.png) no-repeat center;
+				}
+				label:last-child:before {
+					background: rgba(0,0,0,.5) url(../../images/psd-no.png) no-repeat center;
+				}
+				label.active:first-child:before {
+					background-image: url(../../images/user-yes.png);
+				}
+				label.active:last-child:before {
+					background-image: url(../../images/psd-yes.png);
+				}
+				label.error:first-child:before {
+					background-image: url(../../images/user-error.png);
+				}
+				label.error:last-child:before {
+					background-image: url(../../images/psd-error.png);
+				}
+			}
+			.forgot-routewrap {
+				height: 40px;
+				line-height: 40px;
+				text-align: right;
+				margin: $defaultMargin;
+				position: relative;
+				.forgot-psd {
+					width: 90px;
+					float: right;
+					color: #333;
+					text-decoration: underline;
+				}
+			}
+			.forgot-psd:before {
+				content: '';
+				display: block;
+				background: url(../../images/forgot-psd.png) no-repeat center;
+				width: 14px;
+				height: 14px;
+				position: absolute;
+				right: 64px;
+				top: 13px;
+			}
+		}
+		.login-btn {
+			margin: $defaultMargin;
+			border: 0;
+			height: 40px;
+			line-height: 40px;
+			letter-spacing: 5px;
+			color: rgba(255,255,255,.5);
+			background: $baseColor;
+			margin-top: 20px;
+			&.active {
+				color: rgba(255,255,255,1);
+			}
+		}
+		.register-btn {
+			padding: $defaultPadding;
+			button {
+				@extend .login-btn;
+				width: 100%;
+				background: $baseBgOpcity;
+				width: 100%;
+				margin: 0;
+				margin-top: 20px;
+				border: 1px solid $baseColor;
+				text-decoration: underline;
+			}
+		}
+	}
+}
+

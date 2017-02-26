@@ -1,144 +1,131 @@
-/* eslint-disable no-var */
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
-module.exports = {
-	//entry
-	entry: {
-		index: [
-			'webpack-dev-server/client?http://localhost:3000',
+module.exports =  {
+    entry:{
+        index:[
+            'webpack-dev-server/client?http://localhost:3000',
             'webpack/hot/only-dev-server',
-			'./src/main'
-		]
-	},
-	/*
-	 *devServer: {
-	 * 	host:
-	 *  port:
-	 * }
-	 * */
-	devtool: 'false',
-	//输出
-	output: {
-		path: __dirname,
-		filename: './assets/bundle.js'
-	},
-	//插件项
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin()
-	],
-	//其他配置方案
-	resolve: {
-		modulesDirectories: ['node_modules'],
-		extensions: ['', '.js', '.jsx', '.json', '.css', '.scss', '.less','.vue'],
-		alias: {
-			vue: 'vue/dist/vue.js',
-            vueRouter: 'vue-router/dist/vue-router.js'
-		}
-	},
-	//外部引入简化打包体积
-	externals: {
-		'vue': 'Vue'
-		// 'react-dom': 'ReactDom',
-		// 'react-router': 'ReactRouter',
-		// 'jquery': 'jQuery',
-		// 'immutable': 'Immutable',
-		// 'echarts': 'echarts'
-	},
-	//加载器loader
-	module: {
-		noParse: [],
-		loaders: [
-			{
-				test: /.\js[x]?$/,
-				loaders: ['babel?presets[]=es2015&presets[]=stage-1'],
-				include: path.join(__dirname, 'src/')
-			},
-			{
-				test: /.\vue$/,
-				loader: 'vue-loader',
-				include: path.join(__dirname, 'src')
-			},
-			{
-				test: /\.json$/,
-				loader: 'json-loader',
-				query: {
-			        presets: ['es2015', 'react']
-			    },
-				include: path.join(__dirname, 'src/json')
-			},
-			{
-				test:/\.css$/,
-				loader: 'style-loader!css-loader?minimize',
-				include: path.join(__dirname, 'src/css')
-			},
-			{
-				test: /\.less$/,
-				loader: 'style-loader!css-loader!less-loader?minimize',
-				include: path.join(__dirname, 'src/less')
-			},
-			{
-				test: /\.scss$/,
-				loader: 'style-loader!css-loader!sass-loader?minimize',
-				include: path.join(__dirname, 'src/sass')
-			},
-			{
-				test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-				loader: 'url-loader?limit=10000&minetype=application/font-woff'
-			},
-			{
-				test:/\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-				loader: 'file-loader'
-			}
-		]
-	}
-};
+            './static/scripts/main'
+        ]
+    },
+    output: {
+        path: path.resolve(__dirname, './dist'),
+        publicPath: '/dist/',
+        filename: 'bundle.js'
+    },
+    resolve: {
+        modules: [
+            path.join(__dirname, "node_modules")
+        ],
+        extensions: [ '.vue','.js', '.json', '.css', '.less', '.scss' ]
+    },
+    externals: {
+        'vue': 'Vue',
+        'vue-router': 'VueRouter',
+        'vuex': 'Vuex',
+        'jquery': 'jQuery'
+    },
+    //插件项
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            sourceMap: true,
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
+        })
+    ],
+    devtool: 'false',
+    resolveLoader: {
+        moduleExtensions: ["-loader"]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: "vue-loader",
+                include: path.join(__dirname, 'static/scripts'),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.js$/,
+                loader:"babel-loader",
+                options: {
+                    cacheDirectory: true,
+                    presets: [['es2015', {loose: true, module: false}], 'stage-0'],
+                },
+                include: path.join(__dirname, 'static/scripts'),
+                exclude: "/node_modules/"
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    "style-loader",
+                    "css-loader"
+                ],
+                include: path.join(__dirname, 'static/styles'),
+                exclude: "/node_modules/"
+            },
+            {
+                test: /\.(eot|woff|woff2|ttf)([\?]?.*)$/,
+                use: [
+                    "file-loader"
+                ]
+            },
+            // {
+            //     test: /\.less$/,
+            //     use: [
+            //         "style-loader",
+            //         "css-loader",
+            //         "less-loader"
+            //     ],
+            //     include: path.join(__dirname, 'static/styles'),
+            //     exclude: "/node_modules/"
+            // },
+            {
+                test: /\.(scss|sass)$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader"
+                ],
+                include: path.join(__dirname, 'static/styles'),
+                exclude: "/node_modules/"
+            },
+            {
+                test: /\.(jpg|png)$/,
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 8192,
+                        }
+                    }
+                ],
+                include: path.join(__dirname, 'static/images')
+            }
+        ]
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+if (process.env.NODE_ENV === 'production') {
+    module.exports.devtool = '#source-map'
+    // http://vue-loader.vuejs.org/en/workflow/production.html
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
+    ])
+}

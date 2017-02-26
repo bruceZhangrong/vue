@@ -1,0 +1,107 @@
+<template>
+	<div class="index-wrap full-screen bg-f5" v-on:scroll.prevent="changeOpacity($event)">
+		<vHeader ></vHeader>
+		<Banner v-if="needBanner"></Banner>
+		<section class="main-content" style="height:1000px;">
+			<ul class="main-nav bg-fff">
+				<li v-for="k in this.mainNav">
+					<img :src="k.imgs" alt="">
+					<p>{{k.title}}</p>
+				</li>
+			</ul>
+			<div class="live-part">
+				<div class="live-item">
+					<span>Live</span>
+					<br />
+					<span>互联网大咖实时分享</span>
+				</div>
+				<div class="live-item">
+					<span>朋友圈人气职位</span>
+					<span>六大职能Top30</span>
+				</div>
+				<div class="live-item">
+					<div>首发职位</div>
+					<div>城市专场</div>
+				</div>
+				<div class="live-item">
+					<span>24小时急速入职</span>
+					<br />
+					<span>有投必应，急速入职</span>
+				</div>
+			</div>
+		</section>
+	</div>
+</template>
+
+<style>
+	
+</style>
+
+
+<script>
+	import vHeader from '../header/header';
+	import Banner from '../banner/banner'; 
+	import { mapState } from 'vuex';	
+
+	import '../../../styles/index/index.scss';
+	export default {
+		data() {
+			return  {
+				needBanner: true,
+				scrollHeight: 210,
+				mainNav: [
+					{imgs:'./static/images/main-nav01.png',title:'超级雇主'},
+					{imgs:'./static/images/main-nav02.png',title:'豪门大赏'},
+					{imgs:'./static/images/main-nav03.png',title:'高薪必投'},
+					{imgs:'./static/images/main-nav04.png',title:'急速热招'},
+					{imgs:'./static/images/main-nav04.png',title:'超级CXO'},
+					{imgs:'./static/images/main-nav03.png',title:'成长独角兽'},
+					{imgs:'./static/images/main-nav02.png',title:'好评精选'},
+					{imgs:'./static/images/main-nav01.png',title:'新锐态度'}
+				]
+			}
+		},
+		components: {
+			Banner,
+			vHeader
+		},
+		created() {
+			this.$store.dispatch('changeHeader', {
+    			isBorder: false,
+				centerPart: `
+					<div class="top-search pos-f">
+						<div v-if="header.centerClass" class="search-cont text-center">
+							<img src="./static/images/Search.png" alt="" />
+							搜索职位/公司/商区
+						</div>
+					</div>` ,
+				rightPart: `
+					<img class="scan pos-a" src="./static/images/scan-btn.png" alt="" />`
+			})
+		},
+		mounted(){
+        	this.init();
+    	},
+    	methods: {
+    		init() {
+    			this.$parent.navShow = true;
+    		},
+    		changeOpacity(event) {
+    			this.$store.dispatch('changeHeader', {
+    				isBorder: false,
+					isBgColor: true,
+					opacity: parseFloat(event.target.scrollTop/(this.scrollHeight-40)),
+					centerPart: `
+						<div class="top-search pos-f">
+							<div v-if="header.centerClass" class="search-cont text-center">
+								<img src="./static/images/Search.png" alt="" />
+								搜索职位/公司/商区
+							</div>
+						</div>` ,
+					rightPart: `
+						<img class="scan pos-a" src="./static/images/scan-btn.png" alt="" />`
+				})
+    		}
+     	}
+	}
+</script>

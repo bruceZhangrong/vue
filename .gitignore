@@ -1,1 +1,8 @@
-node_modules/
+#log
+*.log
+
+#npm
+node_modules
+
+#build
+dist

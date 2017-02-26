@@ -1,14 +1,18 @@
-/* eslint-disable no-var, strict */
-'use strict';
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const config = require('./webpack.config');
 
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
-
-var server = new WebpackDevServer(webpack(config), {
+const server = new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     historyApiFallback: true,
     hot: true,
+    // progress:true,
+    inline: true,
+    // noInfo:true,  //不用输出打包信息
+    stats: {
+        colors: true  // 用颜色标识
+    },
+    compress:true,
     proxy: {
         '/app/*': {
             target: 'http://www.ih5.cn',

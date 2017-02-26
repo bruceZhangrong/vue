@@ -1,45 +1,35 @@
 {
-  "name": "vuejs",
-  "version": "1.0.0",
-  "description": "a test progrom",
-  "main": "index.js",
+  "name": "Vue-Boss",
+  "description": "The Boss Application use Vue.js to constrution",
+  "author": "Neigevoir",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build": "./node_modules/.bin/webpack -p --config webpack.config.production.js",
-    "dev": "webpack-dev-server --devtool eval --progress --colors"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bruceZhangrong/vue.git"
-  },
-  "author": "bruce",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bruceZhangrong/vue/issues"
+    "dev": "webpack-dev-server --open --inline --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "vue": "^2.5.1",
-    "vue-router": "^2.1.1",
-    "vuex": "^2.1.1",
-    "vue-template-compiler": "^2.1.6"
+    "mint-ui": "^2.1.1",
+    "vue": "^2.1.10",
+    "vue-router": "^2.2.0",
+    "vue-template-compiler": "^2.1.10",
+    "vuex": "^2.1.2"
   },
   "devDependencies": {
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.8",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-1": "^6.16.0",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "cross-env": "^3.1.3",
     "css-loader": "^0.26.1",
-    "jquery": "^3.1.1",
-    "json-loader": "^0.5.4",
-    "node-sass": "^3.13.0",
     "sass": "^0.5.0",
-    "sass-loader": "^4.0.2",
+    "sass-loader": "^5.0.1",
+    "node-sass": "^4.5.0",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "file-loader": "^0.10.0",
     "vue-loader": "^10.0.2",
-    "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
   }
 }

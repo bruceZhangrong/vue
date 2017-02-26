@@ -1,0 +1,54 @@
+@import '../common/common';
+
+.forgot-wrap {
+	background: #fff;
+	padding: 0 5%;
+	padding-top: 10px;
+	box-sizing: border-box;
+	button {
+		margin-top: 30px;
+	}
+}
+.go-back {
+	color: $baseColor;
+	padding-left: 20px;
+	line-height: 16px;
+}
+.go-back:before {
+	content:'';
+	@include absoluteTL();
+	width: 16px;
+	height: 16px;
+	background: url(../../images/arrow_left.png) no-repeat center/contain;
+}
+.title {
+	font-size: 18px;
+	padding: 20px 0;
+}
+.check-phone {
+	border-bottom: 1px solid #ccc;
+	margin-top: 5px;
+}
+.check-code {
+	@extend .check-phone;
+	height: 41px;
+}
+.check-code input {
+	float: left;
+	width: 70%;
+}
+.code-btn {
+	width: 30%;
+	height: 41px;
+	line-height: 40px;
+	color: $baseColor;
+	text-decoration: underline;
+}
+
+.find-back {
+	line-height: 40px;
+	.to-email {
+		color: $baseColor;
+		text-decoration: underline;
+	}
+}

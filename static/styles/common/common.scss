@@ -1,0 +1,190 @@
+/*
+ * reset css
+ */
+@charset "utf-8";
+html, body, div, p, ul, li, dl, dd, dt, h1, h2, h3, h4, h5, h6, ol, input, textarea, section, article, hgroup {
+	padding: 0;
+	margin: 0;
+}
+html, body {
+	width: 100%;
+	height: 100%;
+	-webkit-user-select: none;
+	user-select: none;
+}
+ul, li, ol {
+	list-style: none;
+}
+img {
+	-webkit-touch-callout: none;
+	display: block;
+	border: 0;
+}
+a {
+	text-decoration: none;
+}
+input, textarea, button, button {
+	outline: none;
+}
+
+/* 
+	common sass
+ */
+$baseColor: rgba(83,202,196,1);
+$baseBg: rgb(83,202,196);
+$baseBgOpcity: rgba(83,202,196,.3);
+$fff: #fff;
+$defaultPadding: 0 10%;
+$defaultMargin: 0 10%;
+
+.flex-box {
+	display: flex;
+    flex-direction: column;
+}
+.float-l {float: left;}
+.float-r {float: right;}
+.pos-r {position: relative;}
+.pos-a {position: absolute;}
+.pos-f {position: fixed;}
+.text-center {text-align: center;}
+.block-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+.anchorBL {
+	display: none;
+} 
+.full-screen {
+	width: 100%;
+	min-height: 100%;
+}
+.bg-fff {
+	background-color: #fff;
+}
+.bg-f5 {
+	background-color: #f5f5f5;
+}
+.default-btn {
+	width: 100%;
+	height: 40px;
+	color: #fff;
+	background: $baseBg;
+	text-decoration: underline;
+}
+
+input {
+	box-sizing: border-box;
+	width: 100%;
+	border: 0;
+	height: 40px;
+	line-height: 40px;
+	text-indent:10px;
+	font-size: 14px;
+}
+button {
+	border: 0;
+	font-size: 16px;
+}
+@mixin absoluteTL($top:0, $left:0) {
+	position: absolute;
+	top: $top;
+	left: $left;
+}
+@mixin absoluteTR($top:0, $right:0) {
+	position: absolute;
+	top: $top;
+	right: $right;
+}
+@mixin absoluteBL($btm:0, $left:0) {
+	position: absolute;
+	bottom: $btm;
+	left: $left;
+}
+@mixin absoluteBR($btm:0, $right:0) {
+	position: absolute;
+	bottom: $btm;
+	right: $right;
+}
+
+body {
+	font-size: 14px;
+}
+
+
+/* 
+ * transition css 
+ * bounce : 弹性
+ * fulldown: 向下
+ */
+.bounce-enter-active {
+	animation: bounce-in .5s;
+}
+.bounce-leave-active {
+	animation: bounce-out 1s;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounce-out {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+
+.fulldown-enter-active {
+	animation: fulldown-in 1s;
+}
+.fulldown-leave-active {
+	animation: fulldown-out .8s;
+}
+@keyframes fulldown-in {
+  0% {
+    transform: translate(0, 999px) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) translateZ(0);
+  }
+}
+@keyframes fulldown-out {
+  0% {
+    transform: translate(0, 0) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 999px) translateZ(0);
+  }
+}
+
+.fullleft-enter-active {
+	animation: fulldown-in 1s;
+}
+.fullleft-leave-active {
+	animation: fulldown-out .5s;
+}
+@keyframes fullleft-in {
+  0% {
+    transform: translate(999px, 0) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) translateZ(0);
+  }
+}
+@keyframes fullleft-out {
+  0% {
+    transform: translate(0, 0) translateZ(0);
+  }
+  100% {
+    transform: translate(999px, 0) translateZ(0);
+  }
+}
