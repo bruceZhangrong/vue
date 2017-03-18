@@ -2,7 +2,9 @@
 @import '../common/common';
 .wrap {
 	font-size: 14px;
-	background: url('../../images/loginBg1.jpg') no-repeat center/contain;
+	// background: url('../../images/loginBg1.jpg') no-repeat center/contain;
+	background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1489644175706&di=17fab012230f22069b0e01642246f6e0&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3D35c251105e82b2b7a79f39cc01accb0a%2F20ae87d6277f9e2f938ed41c1830e924b899f315.jpg') no-repeat center/contain;
+	background-size: 100% 100%;
 	position: relative;
 	z-index: 999;
 	.cover {

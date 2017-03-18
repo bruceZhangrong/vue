@@ -3,6 +3,9 @@
 .index-wrap {
 	height: 100%;
 	overflow: auto;
+	&::-webkit-scrollbar {
+		width: 0;
+	}
 }
 .top-search {
 	width: 100%;

@@ -58,11 +58,13 @@
 <script>
 import { Toast } from "mint-ui";
 import vTools from '../../utils/tools';
-
+// import $_AXIOS from '../../api/get-api'
 
 import "../../../styles/login/login";
 
 export default {
+	components: {
+	},
 	data(){
 		return {
 			isShow: true,
@@ -70,13 +72,11 @@ export default {
 			noEmpty: false,
 			phone_val: '',
 			password_val: '',
-			tipOnce: false,
-			user_info: {
-				'13113618318': 'qq1234',
-				'13828477648': 'lbb123',
-				'18270715695': 'jjlg1234'
-			}
+			tipOnce: false
 		}
+	},
+	created() {
+		window.localStorage.removeItem('token');
 	},
 	methods: {
 		close() {
@@ -94,25 +94,23 @@ export default {
 					this.$toast('请输入6位由数字、字符、字符组成的密码!');
 					return;
 				}
-				for(let k in this.user_info) {
-
-					if(this.phone_val == k) {
-						if(this.password_val == this.user_info[k]) {
-							this.isShow = false;
-							this.$router.push({path: '/main'});
-						} else {
-							this.$toast('您的密码输入有误！');
-							this.$refs.password.value = '';
-							this.password_val = '';
-							this.$refs.password.parentNode.className = 'error';
-						}
-						is_right = true;
+				
+				this.API({
+					select_type: '',
+					url: this.URL.LOGIN,
+					datas: {
+						username: this.phone_val,
+						password: this.password_val
+					},
+					success: res => {
+						window.localStorage.setItem('token',res.token);
+						this.$router.push({path:'/home'});
+					},
+					error: res => {
+						this.$refs.phone.parentNode.className = 'error';
+						this.$refs.password.parentNode.className = 'error';
 					}
-				}
-				if(!is_right) {
-					this.$toast('账号不存在');
-					this.$refs.phone.parentNode.className = 'error';
-				}
+				})
 			} else {
 				if(!this.tipOnce) {
 					this.$toast({

@@ -4,7 +4,7 @@
         <section v-if="navShow">
             <ul id="nav" class="pos-f text-center">
                 <li>
-                    <router-link  class="active" active-class="RouterActive" to="/main">
+                    <router-link  class="active" active-class="RouterActive" to="/home">
                         <img src="../images/company.png" />
                         <span>首页</span>
                     </router-link>
@@ -29,13 +29,14 @@
                 </li>
             </ul>
         </section>
+        <Loading></Loading>
     </div>
 </template>
 
 <style>
     #nav {
         bottom: 0;
-        background: #fff;
+        background: rgb(83, 202, 196);
         width: 100%;
         display: flex;
         justify-content: space-around;
@@ -64,11 +65,13 @@
 <script>
 import CommonFunc from './utils/commonfunc'
 
+import Loading from './components/common/loading/loading';
 import './../styles/common/common';
 
 
 export default {
     components:{
+        Loading
     },
     data() {
         return {
@@ -83,6 +86,9 @@ export default {
 
     },
     mounted(){
+        this.$store.dispatch('showLoading', {
+            isLoading: false
+        });
         this.initialization();
     },
     methods:{

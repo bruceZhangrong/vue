@@ -14,9 +14,9 @@ const routers = new VueRouter({
             }
         },
         {
-            path: '/main',
+            path: '/home',
             component:(resolve)=>{
-                require(['../components/index/main'],resolve);
+                require(['../components/home/home'],resolve);
             }
         },
         {

@@ -66,7 +66,7 @@
 
 
 <script>
-	import vTools from '../../utils/tools';
+	import vTools from '../../../utils/tools';
 	import $ from 'jquery';
 	export default {
 		data() {
@@ -102,7 +102,7 @@
 					let cssObj = {
 						'width' : `${this.winWidth}px`,
 						'left' : `${-v * this.winWidth}px`,
-						'webkitTransform' : `translateX(${v * this.winWidth}px)`
+						'transform' : `translateX(${v * this.winWidth}px)`
 					};
 					vTools.setDomStyle(this.$refs.v_li[v], cssObj);
 					if(this.pointShow) {
@@ -111,7 +111,7 @@
 					this.translate_x[v] = v * this.winWidth;
 				}
 				this.translate_x[this.liLength-1] = -this.winWidth;
-				this.$refs.v_li[this.liLength-1].style.webkitTransform = `translateX(${this.translate_x[this.liLength-1]}px)`;
+				this.$refs.v_li[this.liLength-1].style.transform = `translateX(${this.translate_x[this.liLength-1]}px)`;
 				this.setTimer();
 			},
 			touchStart(event) {
@@ -122,8 +122,11 @@
 				[this.endX] = [event.touches[0].pageX];
 				[this.distanceX]= [this.endX - this.startX];
 				for( let v in this.$refs.v_li ) {
-					this.$refs.v_li[v].style.webkitTransform = `translateX(${this.translate_x[v] + this.distanceX}px)`;
-					this.$refs.v_li[v].style.transitionDuration =  '0ms';
+					if(v !== `$remove`) {
+						this.$refs.v_li[v].style.transform = `translateX(${this.translate_x[v]+this.distanceX}px)`;
+						this.$refs.v_li[v].style.transitionDuration =  '0ms';
+					}
+					
 				}
 			},
 			touchEnd(event) {
@@ -140,8 +143,10 @@
 					}
 				} else {
 					for( let v in this.$refs.v_li ) {
-						this.$refs.v_li[v].style.webkitTransform = `translateX(${this.translate_x[v]}px)`;
-						this.$refs.v_li[v].style.transitionDuration =  '300ms';
+						if(v !== `$remove`) {
+							this.$refs.v_li[v].style.transform = `translateX(${this.translate_x[v]}px)`;
+							this.$refs.v_li[v].style.transitionDuration =  '300ms';
+						}
 					}
 				}
 				this.setTimer();
@@ -165,7 +170,7 @@
 							this.$refs.point[v].className = 'active';
 						}
 					}
-					this.$refs.v_li[v].style.webkitTransform = `translateX(${this.translate_x[v]}px)`;
+					this.$refs.v_li[v].style.transform = `translateX(${this.translate_x[v]}px)`;
 				}
 			},
 			setTimer() {

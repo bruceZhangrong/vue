@@ -40,7 +40,7 @@
 
 <script>
 	import vHeader from '../header/header';
-	import Banner from '../banner/banner'; 
+	import Banner from '../common/banner/banner'; 
 	import { mapState } from 'vuex';	
 
 	import '../../../styles/index/index.scss';

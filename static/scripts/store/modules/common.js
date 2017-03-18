@@ -12,6 +12,9 @@ const state = {
 		leftFunc: ()=>{},
 		centerFunc: ()=>{},
 		rightFunc: ()=>{}
+	},
+	loading: {
+		isLoading: false
 	}
 }
 
@@ -28,17 +31,25 @@ const actions = {
 		type.centerFunc = type.centerFunc == null ? ()=>{} : type.centerFunc;
 		type.rightFunc = type.rightFunc == null ? ()=>{} : type.rightFunc;
 		commit(types.COMM_HEADER,type);
+	},
+	showLoading({ commit }, type) {
+		commit(types.COMM_LOADING,type);
 	}
 }
 
 const mutations = {
 	[types.COMM_HEADER](state, type) {
 		state.header = Object.assign(state.header, type);
+	},
+	[types.COMM_LOADING](state, type) {
+		state.loading = Object.assign(state.loading, type);
 	}
 }
 
 const getters = {
-	header: state => state.header
+	header: state => state.header,
+	loading: state => state.loading,
+
 }
 
 export default  {
