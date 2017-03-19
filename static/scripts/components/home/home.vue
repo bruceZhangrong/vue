@@ -1,7 +1,7 @@
 <template>
-	<div class="index-wrap full-screen bg-f5" v-on:scroll.prevent="changeOpacity($event)">
-		<vHeader ></vHeader>
-		<div class="home-contain-wrapper">
+	<div class="index-wrap full-screen bg-f5" v-on:scroll="changeOpacity($event)">
+		<vHeader></vHeader>
+		<div class="home-contain-wrapper" ref="containWrapper">
 			<Banner v-if="needBanner"></Banner>
 			<section class="main-content">
 				<ul class="main-nav bg-fff">
@@ -31,7 +31,7 @@
 					</div>
 				</div>
 			</section>
-			<HomeList></HomeList>
+			<HomeList @add-offset="addOffset" :load-datas="loadDatas"></HomeList>
 		</div>
 		
 	</div>
@@ -43,6 +43,7 @@
 
 
 <script>
+	import $ from 'jquery';
 	import vHeader from '../header/header';
 	import Banner from '../common/banner/banner'; 
 	import HomeList from '../common/home/home-list'; 
@@ -59,6 +60,10 @@
 			return  {
 				needBanner: true,
 				scrollHeight: 210,
+				offset: 10,
+				num: 10,
+				loadDatas: '',
+				viewHeight: window.screen.availHeight,
 				mainNav: [
 					{imgs:'./static/images/main-nav01.png',title:'超级雇主'},
 					{imgs:'./static/images/main-nav02.png',title:'豪门大赏'},
@@ -93,10 +98,11 @@
     			this.$parent.navShow = true;
     		},
     		changeOpacity(event) {
+    			let opacity = parseFloat(event.target.scrollTop/(this.scrollHeight-40));
     			this.$store.dispatch('changeHeader', {
     				isBorder: false,
 					isBgColor: true,
-					opacity: parseFloat(event.target.scrollTop/(this.scrollHeight-40)),
+					bgColor: `rgba(83, 202, 196, ${opacity}`,
 					centerPart: `
 						<div class="top-search pos-f">
 							<div v-if="header.centerClass" class="search-cont text-center">
@@ -106,7 +112,29 @@
 						</div>` ,
 					rightPart: `
 						<img class="scan pos-a" src="./static/images/scan-btn.png" alt="" />`
-				})
+				});
+				let distance = this.$refs.containWrapper.offsetHeight - (this.viewHeight + event.target.scrollTop);
+				if(distance == 0) {
+					this.API({
+						select_type: '',
+						url: this.URL.HOME_LIST,
+						datas: {
+							offset: this.offset,
+							num: this.num,
+							uid: 0,
+							type: `recommend`,
+							published: 0
+						},
+						success: res => {
+							this.loadDatas = res.data;
+						}
+					});
+				}
+
+				
+    		},
+    		addOffset() {
+    			this.offset += this.num; 
     		}
      	}
 	}

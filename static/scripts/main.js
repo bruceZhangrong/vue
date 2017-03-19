@@ -15,15 +15,15 @@ Vue.prototype.API = GET_API;
 Vue.prototype.URL = URL;
 
 //初始化全局数据
-// [
-//     window.log,
-//     window.__ISLOGIN__,
-//     window.__Url__
-// ] = [
-//     console.log,
-//     false,
-//     `http://www.ih5.cn`
-// ];
+[
+    window.log,
+    window.__ISLOGIN__,
+    window.__Url__
+] = [
+    console.log,
+    false,
+    `http://www.ih5.cn`
+];
 
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
 const app = new Vue({

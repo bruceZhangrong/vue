@@ -39,7 +39,7 @@
 						type="button" 
 						class="login-btn" 
 						:class="{active: noEmpty}" 
-						@click.active.prevent="userLogin" 
+						@click.prevent="userLogin" 
 					>登录</button>
 				</div>
 				<div class="register-btn">

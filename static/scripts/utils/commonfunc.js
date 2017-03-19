@@ -67,10 +67,10 @@ const CommonFunc = {
     hadFetch(){
         if(self.fetch) {
             localStorage.setItem("Fetch",true);
-            console.log("您的浏览器支持Fetch Api！");
+            // console.log("您的浏览器支持Fetch Api！");
         }else {
             localStorage.setItem("Fetch",false);
-            alert(`您的浏览器不支持Fetch Api,请更新浏览器或者下载谷歌浏览器新版！`);
+            // alert(`您的浏览器不支持Fetch Api,请更新浏览器或者下载谷歌浏览器新版！`);
         }
     }
 

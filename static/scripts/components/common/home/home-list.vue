@@ -30,7 +30,7 @@
 		/*padding-bottom: 20px;*/
 		border-radius: 6px;
 		overflow: hidden;
-		box-shadow: 0px 0px 5px #ccc;
+		box-shadow: 5px 8px 10px #888;
 	}
 	.list-img {
 		width: 100%;
@@ -84,9 +84,11 @@
 
 <script>
 	export default {
+		props:['loadDatas'],
 		data() {
 			return {
-				homeLists: ''
+				homeLists: [],
+				firstLoad: true,
 			}
 		},
 		created() {
@@ -101,10 +103,16 @@
 					published:0
 				},
 				success: res => {
-					console.log(res.data[0])
-					this.homeLists = res.data
+					this.firstLoad = false;
+					this.homeLists = res.data;
 				}
 			});
+		},
+		watch: {
+			loadDatas: function(val) {
+				this.homeLists = this.homeLists.concat(this.loadDatas);
+				this.$emit('add-offset');
+			}
 		}
 	}
 </script>

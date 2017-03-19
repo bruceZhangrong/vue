@@ -1,7 +1,18 @@
 <template>
 	<div class="bg-fff full-screen">
 		<vHeader></vHeader>
-		
+		<div class="user-wrapper">
+			<div class="my-info banner-height text-center">
+				<div class="my-avatar">
+					<img :src="myAvatar" alt="">
+				</div>
+				<strong>{{myNickname}}</strong>
+				<p>{{myDescription}}</p>
+			</div>
+			<Cell :cell-datas="firstDatas"></Cell>
+			<div class="hr"></div>
+			<Cell :cell-datas="secondDatas"></Cell>
+		</div>
 	</div>
 </template>
 
@@ -19,25 +30,56 @@
 	}
 </style>
 <script>
+	import Cell from '../common/user/cell';
 	import vHeader from '../header/header';
 	import { mapState } from 'vuex';
 	
-	import '../../../styles/home/home.scss';
+	import '../../../styles/home/home';
+	import '../../../styles/user/user';
 
 	export default {
+		components: {
+			vHeader,
+			Cell
+		},
 		data() {
 			return  {
-
+				myAvatar:'../static/images/banner03.jpg',
+				myNickname: 'bruce',
+				myDescription: 'An apple a day, make doctor away!',
+				firstDatas: [
+					{
+						icon: `./static/images/pages.png`,
+						title:`简历`,
+						rightTip:`完整度：0%`
+					},
+					{
+						icon: `./static/images/chance.png`,
+						title:`机会+`,
+						rightTip:`去开启`
+					}
+				],
+				secondDatas: [
+					{
+						icon: `./static/images/opinion.png`,
+						title:`收藏`
+					},
+					{
+						icon: `./static/images/yijian.png`,
+						title:`意见反馈`
+					},
+					{
+						icon: `./static/images/setting.png`,
+						title:`设置`
+					}
+				]
 			}
-		},
-		components: {
-			vHeader
 		},
 		created() {
 			this.$store.dispatch('changeHeader', {
 				isBgColor: true,
-				opacity: 1,
-				bgColor: '#f8f8f8',
+				isBorder: false,
+				bgColor: 'rgb(83, 202, 196)',
 				rightPart: `
 					<div class="edite pos-a">
 						<img class="pos-a right" src="./static/images/editer.png" alt="" />

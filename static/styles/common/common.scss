@@ -55,6 +55,12 @@ $defaultMargin: 0 10%;
 	margin-left: auto;
 	margin-right: auto;
 }
+.clearfix:after { clear: both; content: ''; height: 0; visibility: hidden; display: block; font-style: 0 }
+.hr {
+	width: 100%;
+	height: 10px;
+	background-color: transparent;
+}
 .anchorBL {
 	display: none;
 } 
@@ -79,7 +85,10 @@ $defaultMargin: 0 10%;
 .bg-ddd {
 	background-color: #ddd;
 }
-
+.banner-height {
+	width: 100%;
+	height: 210px;
+}
 input {
 	box-sizing: border-box;
 	width: 100%;

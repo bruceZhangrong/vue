@@ -80,7 +80,7 @@ export default {
     },
     created() {
         CommonFunc.judgeBrowser();  //判断打开的是PC还是手机
-        CommonFunc.hadFetch();      //判断是否可以使用Fetch Api
+        //CommonFunc.hadFetch();      //判断是否可以使用Fetch Api
     },
     beforeMount() {
 
