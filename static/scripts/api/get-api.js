@@ -11,6 +11,7 @@ const $_AXIOS = ({
 	url,
 	datas,
 	headers = {
+		zzzz: '12345678',
 		Authorization: "Bearer {" + localStorage.getItem("token") + "}"
 	},
 	type = "post",
@@ -26,7 +27,7 @@ const $_AXIOS = ({
 			url:url,
 			timeout: 5000,
 			auth: datas,
-			header: headers,
+			headers: headers,
 			success: success,
 			error: error
 		}).then(() => {
@@ -39,8 +40,9 @@ const $_AXIOS = ({
 			type: 'post',
 			url:url,
 			dataType: 'json',
+			timeout: 5000,
 			data: datas,
-			header: headers,
+			headers: headers,
 			success: success,
 			error: error
 		}).then(() => {

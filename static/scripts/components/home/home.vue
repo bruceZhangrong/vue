@@ -1,35 +1,39 @@
 <template>
 	<div class="index-wrap full-screen bg-f5" v-on:scroll.prevent="changeOpacity($event)">
 		<vHeader ></vHeader>
-		<Banner v-if="needBanner"></Banner>
-		<section class="main-content" style="height:1000px;">
-			<ul class="main-nav bg-fff">
-				<li v-for="k in this.mainNav">
-					<img :src="k.imgs" alt="">
-					<p>{{k.title}}</p>
-				</li>
-			</ul>
-			<div class="live-part">
-				<div class="live-item">
-					<span>Live</span>
-					<br />
-					<span>互联网大咖实时分享</span>
+		<div class="home-contain-wrapper">
+			<Banner v-if="needBanner"></Banner>
+			<section class="main-content">
+				<ul class="main-nav bg-fff">
+					<li v-for="k in this.mainNav">
+						<img :src="k.imgs" alt="">
+						<p>{{k.title}}</p>
+					</li>
+				</ul>
+				<div class="live-part">
+					<div class="live-item">
+						<span>Live</span>
+						<br />
+						<span>互联网大咖实时分享</span>
+					</div>
+					<div class="live-item">
+						<span>朋友圈人气职位</span>
+						<span>六大职能Top30</span>
+					</div>
+					<div class="live-item">
+						<div>首发职位</div>
+						<div>城市专场</div>
+					</div>
+					<div class="live-item">
+						<span>24小时急速入职</span>
+						<br />
+						<span>有投必应，急速入职</span>
+					</div>
 				</div>
-				<div class="live-item">
-					<span>朋友圈人气职位</span>
-					<span>六大职能Top30</span>
-				</div>
-				<div class="live-item">
-					<div>首发职位</div>
-					<div>城市专场</div>
-				</div>
-				<div class="live-item">
-					<span>24小时急速入职</span>
-					<br />
-					<span>有投必应，急速入职</span>
-				</div>
-			</div>
-		</section>
+			</section>
+			<HomeList></HomeList>
+		</div>
+		
 	</div>
 </template>
 
@@ -41,10 +45,16 @@
 <script>
 	import vHeader from '../header/header';
 	import Banner from '../common/banner/banner'; 
+	import HomeList from '../common/home/home-list'; 
 	import { mapState } from 'vuex';	
 
-	import '../../../styles/index/index.scss';
+	import '../../../styles/home/home';
 	export default {
+		components: {
+			Banner,
+			vHeader,
+			HomeList
+		},
 		data() {
 			return  {
 				needBanner: true,
@@ -61,10 +71,6 @@
 				]
 			}
 		},
-		components: {
-			Banner,
-			vHeader
-		},
 		created() {
 			this.$store.dispatch('changeHeader', {
     			isBorder: false,
@@ -77,7 +83,7 @@
 					</div>` ,
 				rightPart: `
 					<img class="scan pos-a" src="./static/images/scan-btn.png" alt="" />`
-			})
+			});
 		},
 		mounted(){
         	this.init();

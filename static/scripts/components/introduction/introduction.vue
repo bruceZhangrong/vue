@@ -23,7 +23,7 @@
 
 <script>
 	import vHeader from '../header/header';
-	import '../../../styles/index/index';
+	import '../../../styles/home/home';
 	import { mapState } from 'vuex';
 
 	import '../../../styles/introduction/introduction';

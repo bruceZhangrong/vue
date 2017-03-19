@@ -1,6 +1,6 @@
 <template>
     <div ref="app" class="full-screen bg-fff" @click.prevent="">
-        <router-view class="view" @click.prevent="" ></router-view>
+        <router-view class="view flex-box" @click.prevent="" ></router-view>
         <section v-if="navShow">
             <ul id="nav" class="pos-f text-center">
                 <li>

@@ -17,8 +17,8 @@
 		z-index: 1010;
 	}
 	.loading-bg {
-		width: 46px;
-		height: 46px;
+		width: 56px;
+		height: 56px;
 		background-color: rgba(0,0,0,0.8);
 		border-radius: 8px;
 		padding: 10px;

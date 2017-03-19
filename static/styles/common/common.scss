@@ -11,6 +11,10 @@ html, body {
 	height: 100%;
 	-webkit-user-select: none;
 	user-select: none;
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
 }
 ul, li, ol {
 	list-style: none;
@@ -19,7 +23,6 @@ img {
 	-webkit-touch-callout: none;
 	display: block;
 	border: 0;
-	width: 100%;
 }
 a {
 	text-decoration: none;

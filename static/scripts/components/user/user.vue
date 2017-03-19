@@ -22,7 +22,7 @@
 	import vHeader from '../header/header';
 	import { mapState } from 'vuex';
 	
-	import '../../../styles/index/index.scss';
+	import '../../../styles/home/home.scss';
 
 	export default {
 		data() {
