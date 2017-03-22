@@ -79,7 +79,7 @@
 			this.$store.dispatch('changeHeader', {
 				isBgColor: true,
 				isBorder: false,
-				bgColor: 'rgb(83, 202, 196)',
+				opacity: 1,
 				rightPart: `
 					<div class="edite pos-a">
 						<img class="pos-a right" src="./static/images/editer.png" alt="" />

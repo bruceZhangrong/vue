@@ -2,7 +2,7 @@
 	<div 
 		class="header-wrapper" 
 		:class="{'is-border': header.isBorder}" 
-		:style="`background:${header.bgColor}`"
+		:style="`background:${ !header.isBgColor ? header.bgColor : `rgba(83, 202, 196,${header.opacity})` }`"
 	>
 		<div slot="leftPart" @click.prevent="header.leftFunc" v-html="header.leftPart"></div>
 		<div @click.prevent="header.centerFunc" v-html="header.centerPart">
@@ -11,7 +11,7 @@
 		</div>
 	</div>
 </template>
-<!-- :style="`background:${ !header.isBgColor ? header.bgColor : `rgba(83, 202, 196,${header.opacity}` }`" -->
+<!--  -->
 <style>
 	.header-wrapper {
 		box-sizing: border-box;

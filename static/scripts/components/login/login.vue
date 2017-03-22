@@ -104,7 +104,8 @@ export default {
 					},
 					success: res => {
 						window.localStorage.setItem('token',res.token);
-						this.$router.push({path:'/home'});
+						this.getUserInfo();
+						// this.$router.push({path:'/home'});
 					},
 					error: res => {
 						this.$refs.phone.parentNode.className = 'error';
@@ -120,6 +121,19 @@ export default {
 					this.tipOnce = true;
 				}
 			}
+		},
+		getUserInfo() {
+			this.API({
+				select_type: '',
+				url: this.URL.USER_INFO,
+				datas: {},
+				success: res => {
+					console.log(res.data);
+					// window.localStorage.setItem();
+					// this.$router.push({path:'/home'});
+				},
+				error: res => {}
+			})
 		},
 		checkFeild(event) {
 			let val = event.target.value;

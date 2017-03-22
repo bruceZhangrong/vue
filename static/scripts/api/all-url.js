@@ -3,7 +3,8 @@
 
 const api = {
 	LOGIN: `/app/user/login`,
-	HOME_LIST: `/app/vxwork/list`
+	HOME_LIST: `/app/vxwork/list`,
+	USER_INFO: `app/user/logininfo`
 }
 
 module.exports = api;

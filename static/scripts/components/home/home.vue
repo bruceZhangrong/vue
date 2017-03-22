@@ -102,7 +102,7 @@
     			this.$store.dispatch('changeHeader', {
     				isBorder: false,
 					isBgColor: true,
-					bgColor: `rgba(83, 202, 196, ${opacity}`,
+					opacity: opacity,
 					centerPart: `
 						<div class="top-search pos-f">
 							<div v-if="header.centerClass" class="search-cont text-center">
