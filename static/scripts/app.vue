@@ -116,7 +116,6 @@ export default {
             } else if(cur_router == '/user') {
                this.updateCss(3);
             }
-            console.log(this.onIcon);
         },
         updateCss(num) {
             for(let i = 0; i < 4; i ++) {

@@ -58,6 +58,7 @@
 <script>
 import { Toast } from "mint-ui";
 import vTools from '../../utils/tools';
+import CommonFunc from '../../utils/commonfunc'
 // import $_AXIOS from '../../api/get-api'
 
 import "../../../styles/login/login";
@@ -76,7 +77,7 @@ export default {
 		}
 	},
 	created() {
-		window.localStorage.removeItem('token');
+		window.localStorage.clear();
 	},
 	methods: {
 		close() {
@@ -129,8 +130,9 @@ export default {
 				datas: {},
 				success: res => {
 					console.log(res.data);
-					// window.localStorage.setItem();
-					// this.$router.push({path:'/home'});
+
+					CommonFunc.setLocalStorage(['nick_name','phone'], res.data);
+					this.$router.push({path:'/home'});
 				},
 				error: res => {}
 			})

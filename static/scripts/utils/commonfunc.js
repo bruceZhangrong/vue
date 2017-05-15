@@ -4,6 +4,7 @@
     reaturnDate(回复日期)
     HadFetchApi(fetch判断)
 */
+import LoadingUi from '../components/common/ui/loading-ui/index'
 
 const CommonFunc = {
 
@@ -72,6 +73,22 @@ const CommonFunc = {
             localStorage.setItem("Fetch",false);
             // alert(`您的浏览器不支持Fetch Api,请更新浏览器或者下载谷歌浏览器新版！`);
         }
+    },
+
+    setLocalStorage(arr, params) {
+        for(let i = 0; i < arr.length; i++) {
+            console.log(arr[i],params[arr[i]])
+            window.localStorage.setItem(arr[i], params[arr[i]]);
+        }
+    },
+    showLoadingUi(text, type='snake') {
+        LoadingUi.open({
+            text: text,
+            spinnerType: type
+        })
+    },
+    hideLoadingUi() {
+        LoadingUi.close();
     }
 
 }

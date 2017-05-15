@@ -45,8 +45,8 @@
 		data() {
 			return  {
 				myAvatar:'../static/images/banner03.jpg',
-				myNickname: 'bruce',
-				myDescription: 'An apple a day, make doctor away!',
+				myNickname: window.localStorage.getItem('nick_name'),
+				myDescription: window.localStorage.getItem('phone'),
 				firstDatas: [
 					{
 						icon: `./static/images/pages.png`,

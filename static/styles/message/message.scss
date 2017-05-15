@@ -1,0 +1,28 @@
+
+.msg-wrapper {
+	flex: 1;
+	height: 100%;
+	padding-top: 40px;
+	.msg-head {
+		display: flex;
+		padding-bottom: 20px;
+		color: #999;
+		margin-bottom: 10px;
+		.msg-head-cell {
+			flex: 1;
+			text-align: center;
+			.msg-head-img {
+				width: 50px;
+				height: 50px;
+				margin: 0 auto;
+				overflow: hidden;
+				margin-top: 20px;
+				margin-bottom: 10px;
+				img {
+					margin: 0 auto;
+					margin-top: 14px;
+				}
+			}
+		}
+	}
+}
