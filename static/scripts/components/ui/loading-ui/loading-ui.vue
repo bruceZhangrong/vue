@@ -3,7 +3,7 @@
 		<div class="loading-wrapper">
 			<div class="loading-ui-wrapper">
 				<template>
-					<div :class="loading-ui-cell is-circle${n}"></div>
+					<div :class="`loading-ui-cell is-circle${n}`"></div>
 				</template>
 			</div>
 		</div>

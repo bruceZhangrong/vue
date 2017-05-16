@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const LoadingUi = Vue.extend(require('./Loading-ui'));
+const LoadingUi = Vue.extend(require('./loading-ui'));
 let instance;
 
 export default {

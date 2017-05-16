@@ -4,7 +4,7 @@
     reaturnDate(回复日期)
     HadFetchApi(fetch判断)
 */
-import LoadingUi from '../components/common/ui/loading-ui/index'
+import LoadingUi from '../components/ui/loading-ui/index.js';
 
 const CommonFunc = {
 

@@ -18,7 +18,7 @@ module.exports =  {
         modules: [
             path.join(__dirname, "node_modules")
         ],
-        extensions: [ '.vue','.js', '.json', '.css', '.less', '.scss' ]
+        extensions: [ '.vue','.js', '.json', '.css', '.less', '.scss','.sass' ]
     },
     externals: {
         'vue': 'Vue',
@@ -50,7 +50,12 @@ module.exports =  {
                 test: /\.vue$/,
                 loader: "vue-loader",
                 include: path.join(__dirname, 'static/scripts'),
-                exclude: /node_modules/
+                exclude: /node_modules/,
+                options: {
+                    loaders: {
+                        'scss': 'style-loader!css-loader!sass-loader'
+                    }
+                }
             },
             {
                 test: /\.js$/,
@@ -88,7 +93,7 @@ module.exports =  {
             //     exclude: "/node_modules/"
             // },
             {
-                test: /\.(scss|sass)$/,
+                test: /\.(scss|sass|css)$/,
                 use: [
                     "style-loader",
                     "css-loader",
