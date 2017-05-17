@@ -4,10 +4,10 @@
 		:class="{'is-border': header.isBorder}" 
 		:style="`background:${ !header.isBgColor ? header.bgColor : `rgba(83, 202, 196,${header.opacity})` }`"
 	>
-		<div slot="leftPart" @click.prevent="header.leftFunc" v-html="header.leftPart"></div>
-		<div @click.prevent="header.centerFunc" v-html="header.centerPart">
+		<div class="head-cell" slot="leftPart" @click.prevent="header.leftFunc" v-html="header.leftPart"></div>
+		<div class="head-center" @click.prevent="header.centerFunc" v-html="header.centerPart">
 		</div>
-		<div class="right-part" slot="rightPart" @click.prevent="header.rightFunc" v-html="header.rightPart">
+		<div class="right-part head-cell" slot="rightPart" @click.prevent="header.rightFunc" v-html="header.rightPart">
 		</div>
 	</div>
 </template>
@@ -22,11 +22,29 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		z-index: 999;
+		z-index: 1000;
 		padding: 0 5%;
+		display: flex;
+	}
+	.head-cell {
+		flex: 1;
+	}
+	.head-center {
+		flex: 2;
 	}
 	.is-border {
 		border-bottom: 1px solid #ccc;
+	}
+	.edite {
+		font-size: 14px;
+		right: 5%;
+	}
+	.edite img {
+		float: left;
+		margin-top: 3px;
+	}
+	.edite span {
+		padding-left: 30px;
 	}
 </style>
 

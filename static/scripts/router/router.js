@@ -10,13 +10,19 @@ const routers = new VueRouter({
         {
             path: '/',
             component:(resolve)=>{
-                require(['../components/login/login'],resolve);
+                require(['../components/home/home'],resolve);
             }
         },
         {
             path: '/home',
             component:(resolve)=>{
                 require(['../components/home/home'],resolve);
+            }
+        },
+        {
+            path: '/home-detail',
+            component:(resolve)=>{
+                require(['../components/home/home-detail'],resolve);
             }
         },
         {
@@ -60,6 +66,24 @@ const routers = new VueRouter({
 })
 
 routers.beforeEach((to, from, next) => {
+    let store = routers.app.$options.store;
+    console.log(store)
+    if( to.path == '/' || 
+        to.path == '/introduction' || 
+        to.path == '/home' ||
+        to.path == '/message' ||
+        to.path == '/user' ) {
+        store.dispatch('footBar',{
+            isNavigate: true
+        })
+        console.log('1+1')
+    } else {
+        store.dispatch('footBar',{
+            isNavigate: false
+        })
+        console.log('0+0');
+
+    }
     next(); //必须要加来进行resolve
 })
 

@@ -12,21 +12,17 @@
 			<Cell :cell-datas="firstDatas"></Cell>
 			<div class="hr"></div>
 			<Cell :cell-datas="secondDatas"></Cell>
+			<div class="outlogin bg-fff text-center" @click="outLogin">{{outLoginVal}}</div>
 		</div>
 	</div>
 </template>
 
-<style>
-	.edite {
-		font-size: 14px;
-		right: 5%;
-	}
-	.edite img {
-		float: left;
-		margin-top: 3px;
-	}
-	.edite span {
-		padding-left: 30px;
+<style lang='scss' scoped>
+	.outlogin {
+		margin-top: 20px;
+		height: 48px;
+		line-height: 48px;
+		font-size: 16px;
 	}
 </style>
 <script>
@@ -72,7 +68,8 @@
 						icon: `./static/images/setting.png`,
 						title:`设置`
 					}
-				]
+				],
+				outLoginVal: '退出'
 			}
 		},
 		created() {
@@ -89,10 +86,16 @@
 		},
 		mounted(){
         	this.init();
+        	this.outLoginVal = this.COM_FUNC.LOGIN() ?  '退出' : '登录';
     	},
     	methods: {
     		init() {
     			this.$parent.navShow = true;
+    		},
+    		outLogin() {
+
+    			window.localStorage.clear();
+    			this.$router.push({path: '/login', query: {toPage: this.$route.path}})
     		}
      	}
 	}

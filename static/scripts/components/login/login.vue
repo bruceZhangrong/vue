@@ -43,7 +43,7 @@
 					>登录</button>
 				</div>
 				<div class="register-btn">
-					<button type="button" >注册</button>
+					<button type="button" @click="registerFunc">注册</button>
 				</div>
 			</div>
 		</div>
@@ -58,7 +58,7 @@
 <script>
 import { Toast } from "mint-ui";
 import vTools from '../../utils/tools';
-import CommonFunc from '../../utils/commonfunc'
+// import CommonFunc from '../../utils/commonfunc'
 // import $_AXIOS from '../../api/get-api'
 
 import "../../../styles/login/login";
@@ -78,11 +78,16 @@ export default {
 	},
 	created() {
 		window.localStorage.clear();
+		console.log(this.$route.query.toPage)
+	},
+	mounted() {
+		this.$parent.navShow = false;
 	},
 	methods: {
 		close() {
 			this.isShow = false;
 			this.$parent.navShow = true;
+			this.$router.replace({path: this.$route.query.toPage})
 		},
 		userLogin() {
 			let is_right = false;
@@ -131,7 +136,7 @@ export default {
 				success: res => {
 					console.log(res.data);
 
-					CommonFunc.setLocalStorage(['nick_name','phone'], res.data);
+					this.COM_FUNC.setLocalStorage(['nick_name','phone'], res.data);
 					this.$router.push({path:'/home'});
 				},
 				error: res => {}
@@ -148,6 +153,9 @@ export default {
 				}
 				event.target.parentNode.className = 'active';
 			}
+		},
+		registerFunc() {
+			this.$toast(`此功能暂未开放，敬请原谅`);
 		}
 	}
 }

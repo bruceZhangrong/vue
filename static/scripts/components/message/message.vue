@@ -56,8 +56,8 @@
 
 <script>
 	import vHeader from '../header/header';
-	import { mapState } from 'vuex';
 
+	
 	import '../../../styles/home/home.scss';
 	import '../../../styles/message/message.scss';
 	export default {

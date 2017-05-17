@@ -8,6 +8,7 @@
 				<input type="email" name="" placeholder="请输入邮箱" class="check-email">
 			</div>
 			<button type="button" class="default-btn">验证邮箱</button>
+			<a href="mailto:969597302@qq.com?subject=test&body=use mailto sample">send mail</a>
 		</section>
 	</transition>
 </template>

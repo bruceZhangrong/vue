@@ -89,6 +89,13 @@ const CommonFunc = {
     },
     hideLoadingUi() {
         LoadingUi.close();
+    },
+    LOGIN() {
+        if(window.localStorage.token) {
+            return true
+        } else {
+            return false
+        }
     }
 
 }

@@ -2,7 +2,7 @@
 	<div class="home-list">
 		<div class="list-item" v-for="(v,k) in homeLists">
 			<div class="list-img">
-				<img :src="v.image" alt="v.title">
+				<img :src="v.image" :alt="v.title" :data-nid="v.nid" @click="jumpToDetail">
 			</div>
 			<div class="title">{{v.title}}</div>
 			<div class="user-info">
@@ -92,26 +92,35 @@
 			}
 		},
 		created() {
-			this.API({
-				select_type: '',
-				url: this.URL.HOME_LIST,
-				datas: {
-					offset:0,
-					num:10,
-					uid:0,
-					type:`recommend`,
-					published:0
-				},
-				success: res => {
-					this.firstLoad = false;
-					this.homeLists = res.data;
-				}
-			});
+			if(this.COM_FUNC.LOGIN()) {
+				this.API({
+					select_type: '',
+					url: this.URL.HOME_LIST,
+					datas: {
+						offset:0,
+						num:10,
+						uid:0,
+						type:`recommend`,
+						published:0
+					},
+					success: res => {
+						this.firstLoad = false;
+						this.homeLists = res.data;
+					}
+				});
+			}
+			
 		},
 		watch: {
 			loadDatas: function(val) {
 				this.homeLists = this.homeLists.concat(this.loadDatas);
 				this.$emit('add-offset');
+			}
+		},
+		methods: {
+			jumpToDetail(e) {
+				let nid = e.target.getAttribute('data-nid');
+				this.$router.push({path: '/home-detail', query: {'nid': nid}})
 			}
 		}
 	}

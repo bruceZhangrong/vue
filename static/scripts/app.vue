@@ -1,7 +1,7 @@
 <template>
     <div ref="app" class="full-screen bg-fff" @click.prevent="">
         <router-view class="view flex-box" @click.prevent="" ></router-view>
-        <section v-if="navShow">
+        <section v-if="footBar.isNavigate">
             <ul id="nav" class="pos-f text-center">
                 <li>
                     <router-link  class="active" active-class="RouterActive" to="/home">
@@ -69,10 +69,10 @@
 </style>
 
 <script>
-import CommonFunc from './utils/commonfunc'
 
 import Loading from './components/common/loading/loading';
 import './../styles/common/common';
+import { mapState } from 'vuex';
 
 
 export default {
@@ -81,13 +81,15 @@ export default {
     },
     data() {
         return {
-            navShow: false,
             onIcon: ['-on','','',''],
             onStr: '-on'
         }
     },
     created() {
-        CommonFunc.judgeBrowser();  //判断打开的是PC还是手机
+        if(!this.COM_FUNC.LOGIN()) {
+            this.$router.push({path:'/login', query: {toPage: this.$route.path}});
+        }
+        this.COM_FUNC.judgeBrowser();  //判断打开的是PC还是手机
         //CommonFunc.hadFetch();      //判断是否可以使用Fetch Api
         
     },
@@ -95,11 +97,15 @@ export default {
 
     },
     mounted(){
+
         this.$store.dispatch('showLoading', {
             isLoading: false
         });
         this.initialization();
     },
+    computed: mapState({
+            footBar: state => state.common.footBar
+    }),
     methods:{
         initialization(){
             this.$refs.app.style.height=window.screen.availHeight+'px';

@@ -15,6 +15,9 @@ const state = {
 	},
 	loading: {
 		isLoading: false
+	},
+	footBar: {
+		isNavigate: false
 	}
 }
 
@@ -34,6 +37,9 @@ const actions = {
 	},
 	showLoading({ commit }, type) {
 		commit(types.COMM_LOADING,type);
+	},
+	footBar({ commit }, type) {
+		commit(types.COMM_FOOTERBAR,type)
 	}
 }
 
@@ -43,13 +49,16 @@ const mutations = {
 	},
 	[types.COMM_LOADING](state, type) {
 		state.loading = Object.assign(state.loading, type);
+	},
+	[types.COMM_FOOTERBAR](state, type) {
+		state.footBar = Object.assign(state.footBar, type);
 	}
 }
 
 const getters = {
 	header: state => state.header,
 	loading: state => state.loading,
-
+	footBar: state => state.footBar
 }
 
 export default  {

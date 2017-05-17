@@ -27,6 +27,9 @@
 				transitionName: 'bounce'
 			}
 		},
+		created() {
+			console.log(this.$parent.navShow)
+		},
 		methods: {
 			goBack() {
 				this.$router.go(-1);

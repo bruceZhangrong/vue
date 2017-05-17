@@ -114,24 +114,24 @@
 						<img class="scan pos-a" src="./static/images/scan-btn.png" alt="" />`
 				});
 				let distance = this.$refs.containWrapper.offsetHeight - (this.viewHeight + event.target.scrollTop);
-				if(distance == 0) {
-					this.API({
-						select_type: '',
-						url: this.URL.HOME_LIST,
-						datas: {
-							offset: this.offset,
-							num: this.num,
-							uid: 0,
-							type: `recommend`,
-							published: 0
-						},
-						success: res => {
-							this.loadDatas = res.data;
-						}
-					});
+				if(this.COM_FUNC.LOGIN()) {
+					if(distance == 0) {
+						this.API({
+							select_type: '',
+							url: this.URL.HOME_LIST,
+							datas: {
+								offset: this.offset,
+								num: this.num,
+								uid: 0,
+								type: `recommend`,
+								published: 0
+							},
+							success: res => {
+								this.loadDatas = res.data;
+							}
+						});
+					}
 				}
-
-				
     		},
     		addOffset() {
     			this.offset += this.num; 

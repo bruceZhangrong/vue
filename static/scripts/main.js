@@ -4,6 +4,7 @@ import Routers from './router/router'
 import Store from './store/store'
 import GET_API from './api/get-api'
 import URL from './api/all-url';
+import COM_FUNC from './utils/commonfunc';
 
 
 
@@ -13,6 +14,10 @@ Vue.config.debug = true;
 //导入服务接口
 Vue.prototype.API = GET_API;
 Vue.prototype.URL = URL;
+
+//导入公共方法
+Vue.prototype.COM_FUNC = COM_FUNC;
+
 
 //初始化全局数据
 [
