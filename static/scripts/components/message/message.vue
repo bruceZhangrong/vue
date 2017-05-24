@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-f5 full-screen flex-box">
 		<vHeader></vHeader>
-		<div class="msg-wrapper">
+		<div class="msg-wrapper flex-container">
 			<div class="msg-head bg-fff">
 				<div class="msg-head-cell" v-for="(v, k) in messageHeads">
 					<div
@@ -12,7 +12,7 @@
 							'bg-green': k ==2
 						}"
 					>
-						<img :src="v.img" alt="">
+						<i :class="`fa fa-2x fa-${v.classIcon}`"></i>
 					</div>
 					<span>{{v.content}}</span>
 				</div>
@@ -47,9 +47,13 @@
 	</div>
 </template>
 
-<style>
+<style scoped>
 	.msg-header {
 		font-size: 16px;
+	}
+	.fa {
+		color: #fff;
+		margin-top: 11px;
 	}
 </style>
 
@@ -65,15 +69,15 @@
 			return  {
 				messageHeads: [
 					{
-						img: `./static/images/pages.png`,
+						classIcon: `file-text-o`,
 						content: `简历状态`
 					},
 					{
-						img: `./static/images/message02.png`,
+						classIcon: `server`,
 						content: `职位动态`
 					},
 					{
-						img: `./static/images/opinion.png`,
+						classIcon: `commenting-o`,
 						content: `言职通知`
 					}
 				]

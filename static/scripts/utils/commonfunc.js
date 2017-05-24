@@ -75,29 +75,46 @@ const CommonFunc = {
         }
     },
 
+    //设置localStorage
     setLocalStorage(arr, params) {
         for(let i = 0; i < arr.length; i++) {
-            console.log(arr[i],params[arr[i]])
+            console.log(arr[i]+':',params[arr[i]])
             window.localStorage.setItem(arr[i], params[arr[i]]);
         }
     },
+
+    //显示loading
     showLoadingUi(text, type='snake') {
         LoadingUi.open({
             text: text,
             spinnerType: type
         })
     },
+
+    //隐藏等待loading
     hideLoadingUi() {
         LoadingUi.close();
     },
+
+    //判断登录
     LOGIN() {
         if(window.localStorage.token) {
             return true
         } else {
             return false
         }
-    }
+    },
 
+    //手机号码 部分隐藏
+    replacePhone(str, sign) {
+        if(typeof str !== 'string') {
+            str = str.toString();
+        }
+        let newStr = '';
+        newStr = str.substr(4, 4);
+        let reg = RegExp(newStr, 'g');
+        return newStr = str.replace(reg, sign);
+    }
 }
 
 export default CommonFunc;

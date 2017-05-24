@@ -1,7 +1,11 @@
 <template>
 	<div class="intro-wrap full-screen bg-fff">
 		<vHeader></vHeader>
-		
+		<div class="flex-container">
+			<div class="yz">
+				
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -40,9 +44,9 @@
 		created() {
 			this.$store.dispatch('changeHeader', {
 				bgColor: '#f8f8f8',
-				leftPart:`<img class="icon pos-a left" src="./static/images/topic.png" alt="" />`,
+				leftPart:`<i class="fa fa-coffee"></i>`,
 				centerPart:`<p class="text-center">言职</p>`,
-				rightPart: `<img class="icon pos-a right" src="./static/images/topic-user.png" alt="" />`
+				rightPart: `<i class="fa fa-user-o"></i>`
 			})
 		},
 		mounted(){

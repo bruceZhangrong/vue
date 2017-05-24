@@ -1,35 +1,15 @@
 <template>
 	<div class="index-wrap full-screen bg-f5" v-on:scroll="changeOpacity($event)">
-		<vHeader></vHeader>
+		<vHeader :otherClass="`pos-f`"></vHeader>
 		<div class="home-contain-wrapper" ref="containWrapper">
 			<Banner v-if="needBanner"></Banner>
 			<section class="main-content">
 				<ul class="main-nav bg-fff">
-					<li v-for="k in this.mainNav">
-						<img :src="k.imgs" alt="">
-						<p>{{k.title}}</p>
+					<li v-for="(v, k) in mainNav">
+						<i :class="`fa fa-2x fa-${v.clasIcon}`"></i>
+						<p>{{v.title}}</p>
 					</li>
 				</ul>
-				<div class="live-part">
-					<div class="live-item">
-						<span>Live</span>
-						<br />
-						<span>互联网大咖实时分享</span>
-					</div>
-					<div class="live-item">
-						<span>朋友圈人气职位</span>
-						<span>六大职能Top30</span>
-					</div>
-					<div class="live-item">
-						<div>首发职位</div>
-						<div>城市专场</div>
-					</div>
-					<div class="live-item">
-						<span>24小时急速入职</span>
-						<br />
-						<span>有投必应，急速入职</span>
-					</div>
-				</div>
 			</section>
 			<HomeList @add-offset="addOffset" :load-datas="loadDatas"></HomeList>
 		</div>
@@ -37,8 +17,12 @@
 	</div>
 </template>
 
-<style>
-	
+<style lang="scss" scoped>
+	.fa {
+		display: block;
+	    margin: 10px 0;
+	    color: purple;
+	}
 </style>
 
 
@@ -65,20 +49,21 @@
 				loadDatas: '',
 				viewHeight: window.screen.availHeight,
 				mainNav: [
-					{imgs:'./static/images/main-nav01.png',title:'超级雇主'},
-					{imgs:'./static/images/main-nav02.png',title:'豪门大赏'},
-					{imgs:'./static/images/main-nav03.png',title:'高薪必投'},
-					{imgs:'./static/images/main-nav04.png',title:'急速热招'},
-					{imgs:'./static/images/main-nav04.png',title:'超级CXO'},
-					{imgs:'./static/images/main-nav03.png',title:'成长独角兽'},
-					{imgs:'./static/images/main-nav02.png',title:'好评精选'},
-					{imgs:'./static/images/main-nav01.png',title:'新锐态度'}
+					{clasIcon: 'money',title:'超级雇主'},
+					{clasIcon: 'diamond',title:'豪门大赏'},
+					{clasIcon: 'gbp',title:'高薪必投'},
+					{clasIcon: 'rocket',title:'急速热招'},
+					{clasIcon: 'cc-visa',title:'超级CXO'},
+					{clasIcon: 'level-up',title:'成长独角兽'},
+					{clasIcon: 'thumbs-o-up',title:'好评精选'},
+					{clasIcon: 'shield',title:'新锐态度'}
 				]
 			}
 		},
 		created() {
 			this.$store.dispatch('changeHeader', {
     			isBorder: false,
+    			bgColor: 'transparent',
 				centerPart: `
 					<div class="top-search pos-f">
 						<div v-if="header.centerClass" class="search-cont text-center">
@@ -86,17 +71,12 @@
 							搜索职位/公司/商区
 						</div>
 					</div>` ,
-				rightPart: `
-					<img class="scan pos-a" src="./static/images/scan-btn.png" alt="" />`
+				rightPart: `<i class="fa home-head-fa fa-2x fa-crosshairs"></i>`
 			});
 		},
 		mounted(){
-        	this.init();
     	},
     	methods: {
-    		init() {
-    			this.$parent.navShow = true;
-    		},
     		changeOpacity(event) {
     			let opacity = parseFloat(event.target.scrollTop/(this.scrollHeight-40));
     			this.$store.dispatch('changeHeader', {
@@ -110,8 +90,7 @@
 								搜索职位/公司/商区
 							</div>
 						</div>` ,
-					rightPart: `
-						<img class="scan pos-a" src="./static/images/scan-btn.png" alt="" />`
+					rightPart: `<i class="fa home-head-fa fa-2x fa-crosshairs"></i>`
 				});
 				let distance = this.$refs.containWrapper.offsetHeight - (this.viewHeight + event.target.scrollTop);
 				if(this.COM_FUNC.LOGIN()) {

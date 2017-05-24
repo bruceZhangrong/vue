@@ -16,7 +16,7 @@
 	</div>
 </template>
 
-<style>
+<style scoped>
 	.wrap {
 		position: relative;
 		max-width: 100%;
@@ -38,7 +38,8 @@
 		/*transition-duration: 300ms;*/
 	}
 	li img {
-		max-width: 100%;
+		width: 100%;
+		height: 100%;
 	}
 	.v-point {
 		position: absolute;

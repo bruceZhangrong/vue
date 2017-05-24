@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-fff full-screen">
 		<vHeader></vHeader>
-		<div class="user-wrapper">
+		<div class="user-wrapper flex-container">
 			<div class="my-info banner-height text-center">
 				<div class="my-avatar">
 					<img :src="myAvatar" alt="">
@@ -45,28 +45,33 @@
 				myDescription: window.localStorage.getItem('phone'),
 				firstDatas: [
 					{
-						icon: `./static/images/pages.png`,
+						classIcon: `file-text-o`,
 						title:`简历`,
-						rightTip:`完整度：0%`
+						rightTip:`完整度：0%`,
+						to: 'resume'
 					},
 					{
-						icon: `./static/images/chance.png`,
+						classIcon: `print`,
 						title:`机会+`,
-						rightTip:`去开启`
+						rightTip:`去开启`,
+						to: 'change'
 					}
 				],
 				secondDatas: [
 					{
-						icon: `./static/images/opinion.png`,
-						title:`收藏`
+						classIcon: `heart-o`,
+						title:`收藏`,
+						to: 'favorite'
 					},
 					{
-						icon: `./static/images/yijian.png`,
-						title:`意见反馈`
+						classIcon: `reply-all`,
+						title:`意见反馈`,
+						to: 'feetback'
 					},
 					{
-						icon: `./static/images/setting.png`,
-						title:`设置`
+						classIcon: `cog`,
+						title:`设置`,
+						to: 'setting'
 					}
 				],
 				outLoginVal: '退出'
@@ -76,13 +81,9 @@
 			this.$store.dispatch('changeHeader', {
 				isBgColor: true,
 				isBorder: false,
-				opacity: 1,
-				rightPart: `
-					<div class="edite pos-a">
-						<img class="pos-a right" src="./static/images/editer.png" alt="" />
-						<span>编辑</span>
-					</div>`
-			})
+				opacity: 1
+			});
+			console.log(this.myNickname,this.myDescription)
 		},
 		mounted(){
         	this.init();
@@ -94,9 +95,9 @@
     		},
     		outLogin() {
 
-    			window.localStorage.clear();
+    			window.localStorage.removeItem('token');
     			this.$router.push({path: '/login', query: {toPage: this.$route.path}})
-    		}
+    		},
      	}
 	}
 </script>

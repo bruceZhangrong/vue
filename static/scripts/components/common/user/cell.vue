@@ -1,19 +1,19 @@
 <template>
 	<div class="my-function clearfix">
-		<div class="func-item bg-fff" v-for="(v, k) in cellDatas">
+		<div class="func-item bg-fff" v-for="(v, k) in cellDatas" @click="goTo(v.to)">
 			<div class="is-left">
-				<img :src="v.icon" alt="">
+				<i :class="`fa fa-${v.classIcon}`"></i>
 				<span>{{v.title}}</span>
 			</div>
 			<div class="is-right">
 				<span slot="v.rightTip">{{v.rightTip}}</span>
-				<i></i>
+				<i v-if="!v.noRightArrow" class="fa fa-2x fa-angle-right"></i>
 			</div>
 		</div>
 	</div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 	.func-item {
 		display: flex;
 		padding-left: 10px;
@@ -28,6 +28,9 @@
 	}
 	.is-left {
 		flex: 1;
+		i {
+			margin-right: 5px;
+		}
 	}
 	.is-left img {
 		float: left;
@@ -43,23 +46,34 @@
 		color: #999;
 	}
 	.is-right i {
-		display: block;
-		width: 24px;
-		height: 24px;
-		background: url(../../../../images/arrow-right.png);
 		float: right;
-		margin-top: 12px;
+		margin-top: 11px;
 		margin-left: 10px;
 	}
 </style>
 
 <script>
 	export default {
-		props:['cellDatas'],
+		props: {
+			cellDatas: {
+				type: Array,
+				default: []
+			}
+		},
 		data() {
 			return {
 
 			}
+		},
+		methods: {
+    		goTo(to) {
+    			if(to == undefined) {
+    				return
+    			} else {
+    				this.$router.push({path: '/'+ to});
+    			}
+    			
+    		}
 		}
 
 	}

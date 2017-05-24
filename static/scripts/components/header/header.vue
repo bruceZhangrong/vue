@@ -1,27 +1,28 @@
 <template>
 	<div 
 		class="header-wrapper" 
-		:class="{'is-border': header.isBorder}" 
+		:class="`${header.isBorder?'is-border': ''} ${otherClass}`" 
 		:style="`background:${ !header.isBgColor ? header.bgColor : `rgba(83, 202, 196,${header.opacity})` }`"
 	>
-		<div class="head-cell" slot="leftPart" @click.prevent="header.leftFunc" v-html="header.leftPart"></div>
-		<div class="head-center" @click.prevent="header.centerFunc" v-html="header.centerPart">
+		<div :class="{'head-cell': header.leftPart}" slot="leftPart" @click.prevent="header.leftFunc" v-html="header.leftPart"></div>
+		<div class="head-center font-16" @click.prevent="header.centerFunc" v-html="header.centerPart">
 		</div>
-		<div class="right-part head-cell" slot="rightPart" @click.prevent="header.rightFunc" v-html="header.rightPart">
+		<div class="right-part" :class="{'head-cell': header.rightPart}" slot="rightPart" @click.prevent="header.rightFunc" v-html="header.rightPart">
 		</div>
 	</div>
 </template>
 <!--  -->
-<style>
+<style scoped lang="scss">
 	.header-wrapper {
 		box-sizing: border-box;
 		width: 100%;
 		height: 40px;
 		line-height: 40px;
-		background: transparent;
-		position: fixed;
-		top: 0;
-		left: 0;
+		// background: transparent;
+		background: #53cac4;
+		// position: fixed;
+		// top: 0;
+		// left: 0;
 		z-index: 1000;
 		padding: 0 5%;
 		display: flex;
@@ -46,12 +47,22 @@
 	.edite span {
 		padding-left: 30px;
 	}
+	
+	.right-part {
+		text-align: right;
+	}
 </style>
 
 
 <script>
 	import { mapState } from 'vuex'
 	export default {
+		props: {
+			otherClass: {
+				type: String,
+				default: ''
+			}
+		},
 		updated() {
 		},
 		computed: mapState({

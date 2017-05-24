@@ -12,6 +12,7 @@ const server = new WebpackDevServer(webpack(config), {
     stats: {
         colors: true  // 用颜色标识
     },
+    disableHostCheck: true,
     compress:true,
     proxy: {
         '/app/*': {

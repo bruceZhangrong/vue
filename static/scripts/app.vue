@@ -5,25 +5,32 @@
             <ul id="nav" class="pos-f text-center">
                 <li>
                     <router-link  class="active" active-class="RouterActive" to="/home">
-                        <img :src="`./static/images/company${onIcon[0]}.png`" />
+                        <!-- <img :src="`./static/images/company${onIcon[0]}.png`" /> -->
+                        <i class="fa fa-2x fa-home"></i>
                         <span>首页</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link class="active" active-class="RouterActive" to="/message">
-                        <img :src="`./static/images/information${onIcon[1]}.png`" />
+                        <!-- <img :src="`./static/images/information${onIcon[1]}.png`" /> -->
+                        <i class="fa fa-2x fa-commenting-o"></i>
+
                         <span>消息</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link class="active" active-class="RouterActive" to="/introduction">
-                        <img :src="`./static/images/position${onIcon[2]}.png`" />
+                        <!-- <img :src="`./static/images/position${onIcon[2]}.png`" /> -->
+                        <i class="fa fa-2x fa-medium"></i>
+
                         <span>言职</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link class="active" active-class="RouterActive" to="/user">
-                        <img :src="`./static/images/user${onIcon[3]}.png`" />
+                        <!-- <img :src="`./static/images/user${onIcon[3]}.png`" /> -->
+                        <i class="fa fa-2x fa-user-circle"></i>
+
                         <span>我</span>
                     </router-link>
                 </li>
@@ -41,7 +48,7 @@
         display: flex;
         justify-content: space-around;
         font-size: 12px;
-        border-top: 1px solid #ccc;
+        box-shadow: 0 -1px 10px #fff;
     }
     #nav li {
         float: left;
@@ -64,6 +71,14 @@
     }
     #bruce {
         overflow-y: auto; 
+    }
+    .view {
+        width: 100%;
+        height: 100%;
+    }
+    #nav i {
+        display: block;
+        margin-bottom: 5px; 
     }
 
 </style>

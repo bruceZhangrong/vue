@@ -18,16 +18,14 @@
 								type="text" 
 								value="" 
 								placeholder="请输入已验证的手机号码或邮箱" 
-								v-model="phone_val"
 							>
 						</label>
 						<label>
 							<input 
-								type="text" 
+								type="password" 
 								ref="password" 
 								value="" 
 								@keyup="checkFeild($event)" placeholder="请输入密码" 
-								v-model="password_val"
 							>
 						</label>
 					</div>
@@ -77,11 +75,17 @@ export default {
 		}
 	},
 	created() {
-		window.localStorage.clear();
-		console.log(this.$route.query.toPage)
+		// window.localStorage.clear();
+
 	},
 	mounted() {
 		this.$parent.navShow = false;
+		let phoneVal = window.localStorage.getItem('phone');
+		if(phoneVal) {
+			this.$refs.phone.value = phoneVal;
+			this.$refs.phone.parentNode.className = 'active';
+			// this.$refs.password.focus();
+		}
 	},
 	methods: {
 		close() {
@@ -91,6 +95,8 @@ export default {
 		},
 		userLogin() {
 			let is_right = false;
+			this.phone_val = this.$refs.phone.value;
+			this.password_val = this.$refs.password.value;
 			if(this.phone_val != '' && this.password_val != '') {
 				if(!vTools.checkPhone(this.phone_val)) {
 					this.$toast('号码格式错误!');
@@ -136,7 +142,7 @@ export default {
 				success: res => {
 					console.log(res.data);
 
-					this.COM_FUNC.setLocalStorage(['nick_name','phone'], res.data);
+					this.COM_FUNC.setLocalStorage(['nick_name','phone','email'], res.data);
 					this.$router.push({path:'/home'});
 				},
 				error: res => {}
@@ -144,6 +150,8 @@ export default {
 		},
 		checkFeild(event) {
 			let val = event.target.value;
+			this.phone_val = this.$refs.phone.value;
+			this.password_val = this.$refs.password.value;
 			if(val == '' ) {
 				this.noEmpty = false;
 				event.target.parentNode.className = '';

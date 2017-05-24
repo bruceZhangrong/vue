@@ -11,7 +11,7 @@ const $_AXIOS = ({
 	url,
 	datas,
 	headers = {
-		zzzz: '12345678',
+		"X-Requested-With": "XMLHttpRequest",
 		Authorization: "Bearer {" + localStorage.getItem("token") + "}"
 	},
 	type = "post",

@@ -55,7 +55,14 @@ $defaultMargin: 0 10%;
 	margin-left: auto;
 	margin-right: auto;
 }
-.clearfix:after { clear: both; content: ''; height: 0; visibility: hidden; display: block; font-style: 0 }
+.clearfix:after { 
+    clear: both; 
+    content: ''; 
+    height: 0; 
+    visibility: hidden; 
+    display: block; 
+    font-style: 0 
+}
 .hr {
 	width: 100%;
 	height: 10px;
@@ -74,8 +81,14 @@ $defaultMargin: 0 10%;
 .color-fff {
     color: $colorfff;
 }
+.bg-topic {
+    background-color: #53cac4;
+}
 .bg-f5 {
 	background-color: #f5f5f5;
+}
+.bg-transparent {
+    background-color: transparent;
 }
 .default-btn {
 	width: 100%;
@@ -102,6 +115,14 @@ $defaultMargin: 0 10%;
 }
 
 
+//字体 
+.font-12 {font-size: 12px;}
+.font-14 {font-size: 14px;}
+.font-16 {font-size: 16px;}
+.font-18 {font-size: 18px;}
+.font-20 {font-size: 20px;}
+.font-22 {font-size: 22px;}
+.font-24 {font-size: 24px;}
 
 
 
@@ -232,4 +253,56 @@ body {
   100% {
     transform: translate(999px, 0) translateZ(0);
   }
+}
+
+
+//修改头部样式
+.head-cell {
+    .fa {
+        font-size: 1.5em;
+    }
+}
+
+//input list css
+.input-list {
+    position: relative;
+    height: 50px;
+    line-height: 40px;
+    padding: 5px 0;
+    border-bottom: 1px solid #ebebeb;
+    .list-title {
+        width: 80px;
+        position: absolute;
+        top: 5px;
+        left: 0;
+    }
+    .list-text {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        input {
+            flex: 1;
+        }
+    }
+}
+.input-list-word {
+    .list-text {
+        padding-left: 80px;
+    }
+}
+
+//btn 
+.btn-self-wrapper {
+    padding: 0 20px;
+}
+.flex-container {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+}
+.home-head-fa {
+    line-height: 40px;
+    font-size: 2em;
+    color: #fff;
 }

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from "vue-router";
+import COM_FUNC from '../utils/commonfunc'
 
 Vue.use(VueRouter);
 
@@ -62,12 +63,37 @@ const routers = new VueRouter({
                 require(['../components/user/user'],resolve);
             }
         },
+        {
+            path:'/setting',
+            component:(resolve)=>{
+                require(['../components/user/setting'],resolve);
+            }
+        },
+        {
+            path:'/my-account',
+            component:(resolve)=>{
+                require(['../components/user/setting/my-account'],resolve);
+            }
+        },
+        {
+            path:'/change-password',
+            component:(resolve)=>{
+                require(['../components/user/setting/change-password'],resolve);
+            }
+        },
+        {
+            path:'/success',
+            component:(resolve)=>{
+                require(['../components/common/ui/success'],resolve);
+            }
+        },
     ]
 })
 
 routers.beforeEach((to, from, next) => {
     let store = routers.app.$options.store;
-    console.log(store)
+
+    //footbar show or hide
     if( to.path == '/' || 
         to.path == '/introduction' || 
         to.path == '/home' ||
@@ -76,13 +102,25 @@ routers.beforeEach((to, from, next) => {
         store.dispatch('footBar',{
             isNavigate: true
         })
-        console.log('1+1')
     } else {
         store.dispatch('footBar',{
             isNavigate: false
         })
-        console.log('0+0');
-
+    }
+    // jump to login 
+    if(!COM_FUNC.LOGIN()) {
+        if( to.path == '/' || 
+            to.path == '/introduction' || 
+            to.path == '/home' ||
+            to.path == '/message' ||
+            to.path == '/user' ||
+            to.path == '/login' ) {
+            next();
+        } else {
+            routers.go({
+                name: 'login'
+            });
+        }
     }
     next(); //必须要加来进行resolve
 })

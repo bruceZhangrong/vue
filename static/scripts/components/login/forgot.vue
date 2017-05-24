@@ -4,10 +4,22 @@
 			<div class="go-back pos-r" @click="goBack">返回</div>
 			<p class="title text-center">验证手机</p>
 			<div class="check-info">
-				<input type="tel" name="" maxlength="11" placeholder="手机号（仅支持中国大陆号）" class="check-phone">
+				<input 
+					type="tel" 
+					maxlength="11" 
+					placeholder="手机号（仅支持中国大陆号）" class="check-phone"
+				>
 				<div class="check-code">
-					<input type="tel" name="" maxlength="6" minlength="6" placeholder="验证码">
-					<p class="code-btn float-r text-center" @click="sendShortMsg">获取验证码</p>
+					<input 
+						type="tel" 
+						maxlength="6" 
+						minlength="6" 
+						placeholder="验证码"
+					>
+					<p 
+						class="code-btn float-r text-center" 
+						@click="sendShortMsg">获取验证码
+					</p>
 				</div>
 			</div>
 			<button type="button" class="default-btn">下一步</button>
@@ -17,8 +29,6 @@
 </template>
 
 <script>
-	
-
 	import "../../../styles/login/forgot";
 
 	export default {

@@ -5,7 +5,8 @@ import Store from './store/store'
 import GET_API from './api/get-api'
 import URL from './api/all-url';
 import COM_FUNC from './utils/commonfunc';
-
+// import Awesome from 'FontAwesome-webpack'
+import '../../node_modules/font-awesome/css/font-awesome.min.css'
 
 
 //开启debug模式

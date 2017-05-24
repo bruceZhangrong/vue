@@ -65,7 +65,7 @@ module.exports =  {
                     presets: [['es2015', {loose: true, module: false}], 'stage-0'],
                 },
                 include: path.join(__dirname, 'static/scripts'),
-                exclude: "/node_modules/"
+                // exclude: "/node_modules/"
             },
             {
                 test: /\.css$/,
@@ -74,7 +74,7 @@ module.exports =  {
                     "css-loader"
                 ],
                 include: path.join(__dirname, 'static/styles'),
-                exclude: "/node_modules/"
+                // exclude: "/node_modules/"
             },
             {
                 test: /\.(eot|woff|woff2|ttf)([\?]?.*)$/,
@@ -99,11 +99,11 @@ module.exports =  {
                     "css-loader",
                     "sass-loader"
                 ],
-                include: path.join(__dirname, 'static/styles'),
-                exclude: "/node_modules/"
+                // include: path.join(__dirname, 'static/styles'),
+                // exclude: "/node_modules/"
             },
             {
-                test: /\.(jpg|png)$/,
+                test: /\.(jpg|png|svg)$/,
                 use: [
                     {
                         loader: "url-loader",
@@ -112,7 +112,19 @@ module.exports =  {
                         }
                     }
                 ],
-                include: path.join(__dirname, 'static/images')
+                // include: path.join(__dirname, 'static/images')
+            },
+            { 
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            limit: 10000,
+                            mimetype: "application/font-woff"
+                        }
+                    }
+                ],
             }
         ]
     }
