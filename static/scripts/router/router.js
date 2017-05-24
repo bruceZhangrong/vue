@@ -114,7 +114,9 @@ routers.beforeEach((to, from, next) => {
             to.path == '/home' ||
             to.path == '/message' ||
             to.path == '/user' ||
-            to.path == '/login' ) {
+            to.path == '/login' ||
+            to.path == '/forgot' || 
+            to.path == 'check-email') {
             next();
         } else {
             routers.go({

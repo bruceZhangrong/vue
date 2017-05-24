@@ -86,6 +86,13 @@ export default {
 			this.$refs.phone.parentNode.className = 'active';
 			// this.$refs.password.focus();
 		}
+		this.phone_val = this.$refs.phone.value;
+		this.password_val = this.$refs.password.value;
+		console.log(this.phone_val, this.password_val)
+		if(this.phone_val != '' && this.password_val != '') {
+			this.noEmpty = true;
+		}
+
 	},
 	methods: {
 		close() {
@@ -95,8 +102,6 @@ export default {
 		},
 		userLogin() {
 			let is_right = false;
-			this.phone_val = this.$refs.phone.value;
-			this.password_val = this.$refs.password.value;
 			if(this.phone_val != '' && this.password_val != '') {
 				if(!vTools.checkPhone(this.phone_val)) {
 					this.$toast('号码格式错误!');
