@@ -1,8 +1,18 @@
 <template>
     <div>
         <vHeader></vHeader>
-        <div class="container">
-            <div class="first-title">{{homeDetails.title}}</div>
+        <div class="container flex-container">
+            <div class="first-title">
+                <div class="title-left">{{homeDetails.title}}</div>
+                <div class="attention-wrapper">
+                    <div
+                        v-if="!attentioned" 
+                        class="attention"
+                        @click="attentionIt"
+                    ><i class="fa fa-plus"></i>收藏</div>
+                    <div v-else class="attention on">已收藏</div>
+                </div>
+            </div>
             <div class="second-title">
                 <div class="items description">{{homeDetails.description}}</div>
                 <div class="items browser-times">
@@ -26,19 +36,46 @@
         .first-title {
             padding: 10px 0;
             font-size: 18px;
+            display: flex;
+            .title-left {
+                flex: 3;
+            }
+            .attention-wrapper {
+                flex: 1;
+                .attention {
+                    width: 54px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    height: 24px;
+                    line-height: 22px;
+                    color: #666;
+                    font-size: 12px;
+                    text-align: center;
+                    float: right;
+                    i {
+                        margin-right: 5px;
+                    }
+                    &.on {
+                        color: #999;
+                    }
+                }
+            }
+            
+
         }
         .second-title {
             color: #999;
             display: flex;
             .items {
-                flex: 1;
                 &.description {
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+                    flex: 2;
                 }
                 &.browser-times {
                     text-align: right;
+                    flex: 3;
                     i {
                         margin: 0 5px;
                     }
@@ -78,10 +115,17 @@
         data() {
             return {
                 nid: '',
-                homeDetails: {}
+                uid: '',
+                homeDetails: {},
+                attentioned: false
             }
         },
         created() {
+            if(!!parseInt(this.$route.query.focus)) {
+                this.attentioned = true;
+            } else {
+                this.attentioned = false;
+            }
             this.nid = this.$route.query.nid;
             this.API({
                 select_type: '',
@@ -113,6 +157,24 @@
         methods: {
             goBack() {
                 this.$router.replace({path: '/home'});
+            },
+            attentionIt() {
+                this.uid = this.$route.query.uid;
+                this.API({
+                    select_type: '',
+                    url: this.URL.MY_FAVORITE,
+                    datas: {
+                        uid: this.uid
+                    },
+                    success: res => {
+                        if(res.status_code == 200) {
+                            this.attentioned = true;
+                        }
+                    },
+                    error: res => {
+                        this.$toast(res)
+                    }
+                })
             }
         }
     }

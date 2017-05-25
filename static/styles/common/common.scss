@@ -30,6 +30,22 @@ a {
 input, textarea, button, button {
 	outline: none;
 }
+input:disabled {
+    background: transparent;
+    color: #666;
+}
+button:disabled {
+  opacity: 0.5;
+  color: #666;
+}
+input::-webkit-input-placeholder {
+  color: #999;
+}
+input:-moz-placeholder {
+  color: #999;
+}
+
+
 
 /* 
 	common sass
@@ -271,7 +287,7 @@ body {
     padding: 5px 0;
     border-bottom: 1px solid #ebebeb;
     .list-title {
-        width: 80px;
+        width: 100px;
         position: absolute;
         top: 5px;
         left: 0;
@@ -287,9 +303,10 @@ body {
 }
 .input-list-word {
     .list-text {
-        padding-left: 80px;
+        padding-left: 100px;
     }
 }
+
 
 //btn 
 .btn-self-wrapper {
@@ -305,4 +322,11 @@ body {
     line-height: 40px;
     font-size: 2em;
     color: #fff;
+}
+
+.sms-btn {
+    font-size: 12px;
+    background: transparent;
+    text-decoration: underline;
+    color: #53cac4;
 }

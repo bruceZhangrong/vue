@@ -9,6 +9,12 @@ const routers = new VueRouter({
     base: __dirname,
     routes: [
         {
+            path: '',
+            component:(resolve)=>{
+                require(['../components/home/home'],resolve);
+            }
+        },
+        {
             path: '/',
             component:(resolve)=>{
                 require(['../components/home/home'],resolve);
@@ -82,11 +88,18 @@ const routers = new VueRouter({
             }
         },
         {
+            path:'/change-phone',
+            component:(resolve)=>{
+                require(['../components/user/setting/change-phone'],resolve);
+            }
+        },
+        {
             path:'/success',
             component:(resolve)=>{
                 require(['../components/common/ui/success'],resolve);
             }
         },
+
     ]
 })
 

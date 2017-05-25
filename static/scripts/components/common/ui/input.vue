@@ -5,7 +5,6 @@
                 class="list-text"
                 @click="selectFunc"
             >
-                <slot name="extra"></slot>
                 <input 
                     class="text-input"
                     :type="inputType"
@@ -17,6 +16,7 @@
                     :maxlength="maxLength"
                     @input="handleInput"
                 />
+                <slot name="extra"></slot>
             </div>
         </div>
 </template>

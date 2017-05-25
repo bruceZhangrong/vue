@@ -80,7 +80,7 @@ export default {
 	},
 	mounted() {
 		this.$parent.navShow = false;
-		let phoneVal = window.localStorage.getItem('phone');
+		let phoneVal = window.localStorage.getItem('name');
 		if(phoneVal) {
 			this.$refs.phone.value = phoneVal;
 			this.$refs.phone.parentNode.className = 'active';
@@ -147,7 +147,7 @@ export default {
 				success: res => {
 					console.log(res.data);
 
-					this.COM_FUNC.setLocalStorage(['nick_name','phone','email'], res.data);
+					this.COM_FUNC.setLocalStorage(['nick_name','phone','email','name'], res.data);
 					this.$router.push({path:'/home'});
 				},
 				error: res => {}

@@ -66,7 +66,11 @@
         },
         methods: {
             confirmTo() {
-                this.$route.query.passFunc();
+                if(this.$route.query.passFunc) {
+                    this.$route.query.passFunc();
+                } else {
+                    this.$router.replace({path:'/home'})
+                }
             }
         }
     }

@@ -114,6 +114,28 @@ const CommonFunc = {
         newStr = str.substr(4, 4);
         let reg = RegExp(newStr, 'g');
         return newStr = str.replace(reg, sign);
+    },
+    //设置dom style
+    setDomStyle(dom, obj) {
+        for(let v in obj) {
+            dom.style[v] = obj[v];
+        }
+    },
+    //检查手机号码
+    checkPhone(phone) {
+        if(phone.match(/^1[3578]\d{9}$/)) {
+            return true
+        } else {
+            return false
+        }
+    },
+    //检查密码
+    checkPassword(psd) {
+        if(psd.match(/^[\d\w@?!#$%^&*]{6,}$/)) {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

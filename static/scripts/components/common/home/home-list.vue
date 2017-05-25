@@ -2,7 +2,13 @@
 	<div class="home-list">
 		<div class="list-item" v-for="(v,k) in homeLists">
 			<div class="list-img">
-				<img :src="v.image" :alt="v.title" :data-nid="v.nid" @click="jumpToDetail">
+				<img 
+					:src="v.image" 
+					:alt="v.title" 
+					:data-nid="v.nid" 
+					:data-uid="v.uid"
+					@click="jumpToDetail"
+				>
 			</div>
 			<div class="title">{{v.title}}</div>
 			<div class="user-info">
@@ -89,10 +95,14 @@
 			return {
 				homeLists: [],
 				firstLoad: true,
+				allUid: [],
+				uidDatas: []
 			}
 		},
 		created() {
+			let that = this;
 			if(this.COM_FUNC.LOGIN()) {
+				//首次加载列表
 				this.API({
 					select_type: '',
 					url: this.URL.HOME_LIST,
@@ -108,6 +118,25 @@
 						this.homeLists = res.data;
 					}
 				});
+				//关注列表
+				this.API({
+					select_type: '',
+					url: this.URL.FOCUS_LIST,
+					datas: {
+						type: `focus`,
+						num: 20,
+						offset: 0
+					},
+					success: res => {
+						if(res.status_code == 203) {
+							this.$toast(res.message)
+						} else {
+							res.data.forEach(res => {
+								that.allUid.push(res.uid);
+							})
+						}
+					}
+				});
 			}
 			
 		},
@@ -120,7 +149,21 @@
 		methods: {
 			jumpToDetail(e) {
 				let nid = e.target.getAttribute('data-nid');
-				this.$router.push({path: '/home-detail', query: {'nid': nid}})
+				let uid = e.target.getAttribute('data-uid');
+				let focused = 0;
+				for( let i = 0; i < this.allUid.length; i ++) {
+					if(uid == this.allUid[i]) {
+						focused = 1;
+					}
+				}
+				this.$router.push({
+					path: '/home-detail', 
+					query: {
+						'nid': nid,
+						'uid': uid,
+						'focus': focused
+					}
+				})
 			}
 		}
 	}

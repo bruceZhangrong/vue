@@ -4,7 +4,7 @@
         <section v-if="footBar.isNavigate">
             <ul id="nav" class="pos-f text-center">
                 <li>
-                    <router-link  class="active" active-class="RouterActive" to="/home">
+                    <router-link  class="active" :class="{'RouterActive': firstTimes}" active-class="RouterActive" to="/home">
                         <!-- <img :src="`./static/images/company${onIcon[0]}.png`" /> -->
                         <i class="fa fa-2x fa-home"></i>
                         <span>首页</span>
@@ -96,8 +96,9 @@ export default {
     },
     data() {
         return {
-            onIcon: ['-on','','',''],
-            onStr: '-on'
+            // onIcon: ['-on','','',''],
+            // onStr: '-on'
+            firstTimes: true
         }
     },
     created() {
@@ -126,25 +127,32 @@ export default {
             this.$refs.app.style.height=window.screen.availHeight+'px';
             this.$refs.app.style.width=window.screen.availWidth+'px';
         },
+        // watchRouter() {
+        //     let cur_router = this.$route.path;
+        //     if(cur_router == '/home') {
+        //         this.updateCss(0);
+        //     } else if(cur_router == '/message') {
+        //         this.updateCss(1);
+        //     } else if(cur_router == '/introduction') {
+        //         this.updateCss(2);
+        //     } else if(cur_router == '/user') {
+        //        this.updateCss(3);
+        //     }
+        // },
+        // updateCss(num) {
+        //     for(let i = 0; i < 4; i ++) {
+        //         if(i !== num) {
+        //             this.onIcon[i] = '';
+        //         } else {
+        //              this.onIcon[i] = this.onStr;
+        //         }
+        //     }
+        // }
         watchRouter() {
-            let cur_router = this.$route.path;
-            if(cur_router == '/home') {
-                this.updateCss(0);
-            } else if(cur_router == '/message') {
-                this.updateCss(1);
-            } else if(cur_router == '/introduction') {
-                this.updateCss(2);
-            } else if(cur_router == '/user') {
-               this.updateCss(3);
-            }
-        },
-        updateCss(num) {
-            for(let i = 0; i < 4; i ++) {
-                if(i !== num) {
-                    this.onIcon[i] = '';
-                } else {
-                     this.onIcon[i] = this.onStr;
-                }
+            if(this.$route.path == '/') {
+                this.firstTimes = true;
+            } else {
+                this.firstTimes = false;
             }
         }
     },

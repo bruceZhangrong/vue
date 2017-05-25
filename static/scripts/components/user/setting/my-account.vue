@@ -33,7 +33,8 @@
                 userInfo: [
                     { 
                         title: '手机号',
-                        rightTip: this.COM_FUNC.replacePhone(window.localStorage.getItem('phone'), '****') || '未绑定'
+                        rightTip: this.COM_FUNC.replacePhone(window.localStorage.getItem('phone'), '****') || '未绑定',
+                        to: 'change-phone'
                     },
                     { 
                         title: '邮箱', 
