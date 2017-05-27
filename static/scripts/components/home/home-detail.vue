@@ -60,8 +60,6 @@
                     }
                 }
             }
-            
-
         }
         .second-title {
             color: #999;

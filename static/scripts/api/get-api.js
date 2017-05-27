@@ -8,6 +8,7 @@ import { Toast } from 'mint-ui'
 
 const $_AXIOS = ({
 	select_type,
+	noLoading = false,
 	url,
 	datas,
 	headers = {
@@ -18,9 +19,11 @@ const $_AXIOS = ({
 	success,
 	error
 }) => {
-	Store.dispatch('showLoading',{
-		isLoading: true
-	});
+	if(!noLoading) {
+		Store.dispatch('showLoading',{
+			isLoading: true
+		});
+	}
 	if(select_type == "ax") {
 		return axios({
 			method: 'post',

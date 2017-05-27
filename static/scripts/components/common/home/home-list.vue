@@ -10,7 +10,20 @@
 					@click="jumpToDetail"
 				>
 			</div>
-			<div class="title">{{v.title}}</div>
+			<div class="title-wrapper">
+				<div class="title">{{v.title}}</div>
+				<div class="focus-wrapper">
+                    <div
+                        v-if="noFocused[k]" 
+                        class="focus"
+                        @click="focusIt" 
+                        :data-id="k"
+                        :data-uid="v.uid"
+                        ref="noFocus"
+                    ><i class="fa fa-plus"></i>收藏</div>
+                    <div v-else class="focus on">已收藏</div>
+                </div>
+			</div>
 			<div class="user-info">
 				<div class="avatar float-l">
 					<img :src="v.user.picture" alt="">
@@ -24,7 +37,38 @@
 	</div>
 </template>
 
-<style lang="" scoped>
+<style lang="scss" scoped>
+	.title-wrapper {
+        padding: 10px;
+        font-size: 18px;
+        display: flex;
+        .title {
+            flex: 3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .focus-wrapper {
+            flex: 1;
+            .focus {
+                width: 54px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                height: 24px;
+                line-height: 22px;
+                color: #666;
+                font-size: 12px;
+                text-align: center;
+                float: right;
+                i {
+                    margin-right: 5px;
+                }
+                &.on {
+                    color: #999;
+                }
+            }
+        }
+    }
 	.home-list {
 		padding-left: 10px;
 		padding-right: 10px;
@@ -45,11 +89,6 @@
 	}
 	.list-item img {
 		width: 100%;
-	}
-	.title {
-		font-size: 16px;
-		line-height: 36px;
-		padding: 0 10px;
 	}
 	.user-info {
 		border-top: 1px solid #eee;
@@ -96,7 +135,8 @@
 				homeLists: [],
 				firstLoad: true,
 				allUid: [],
-				uidDatas: []
+				uidDatas: [],
+				noFocused: []
 			}
 		},
 		created() {
@@ -116,6 +156,8 @@
 					success: res => {
 						this.firstLoad = false;
 						this.homeLists = res.data;
+						console.log('list',res)
+						this.filterFocusLists();
 					}
 				});
 				//关注列表
@@ -133,20 +175,66 @@
 						} else {
 							res.data.forEach(res => {
 								that.allUid.push(res.uid);
-							})
+							});
+							console.log('focus',res)
+							this.filterFocusLists();
 						}
 					}
 				});
 			}
-			
+			console.log('created',this.noFocused);
+		},
+		mounted() {
+		},
+		updated() {
+			this.filterFocusLists();
 		},
 		watch: {
 			loadDatas: function(val) {
 				this.homeLists = this.homeLists.concat(this.loadDatas);
 				this.$emit('add-offset');
+				this.filterFocusLists();
 			}
 		},
 		methods: {
+			focusIt(e) {
+				console.log('mounted',this.$refs.noFocus)
+
+                let uid = e.target.getAttribute('data-uid');
+                let id = e.target.getAttribute('data-id');
+                let el = this.$refs.noFocus;
+                let ref = null;
+                let k = 0;
+                el.forEach(res => {
+                	if(res.dataset.id == id) {
+                		ref = res;
+                	}
+                	k++;
+                })
+                this.API({
+                    select_type: '',
+                    noLoading: true,
+                    url: this.URL.MY_FAVORITE,
+                    datas: {
+                        uid: uid
+                    },
+                    success: res => {
+                        if(res.status_code == 200) {
+                            // this.noFocused[id] = false;
+                            console.log(ref)
+                            ref.className += ' on';
+                            ref.innerHTML = `已收藏`;
+							this.filterFocusLists();
+
+                        } else {
+                        	this.$toast(res.message)
+                        }
+                    },
+                    error: res => {
+                        this.$toast(res)
+                    }
+                })
+            },
 			jumpToDetail(e) {
 				let nid = e.target.getAttribute('data-nid');
 				let uid = e.target.getAttribute('data-uid');
@@ -164,6 +252,25 @@
 						'focus': focused
 					}
 				})
+			},
+			filterFocusLists() {
+				let that = this;
+				let i = 0;
+				if(this.homeLists.length > 0 && this.allUid.length > 0) {
+					this.homeLists.forEach(res => {
+						let uid = res.uid;
+						this.allUid.every(res => {
+							if(uid == res) {
+								that.noFocused[i] = false;
+								return false;
+							} else {
+								that.noFocused[i] = true;
+								return true;
+							}
+						})
+						i++;
+					});
+				}
 			}
 		}
 	}
