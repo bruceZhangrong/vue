@@ -76,6 +76,12 @@ const routers = new VueRouter({
             }
         },
         {
+            path:'/favorite',
+            component:(resolve)=>{
+                require(['../components/user/favorite'],resolve);
+            }
+        },
+        {
             path:'/my-account',
             component:(resolve)=>{
                 require(['../components/user/setting/my-account'],resolve);

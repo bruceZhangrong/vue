@@ -68,7 +68,8 @@
 		methods: {
     		goTo(to) {
     			if(to == undefined) {
-    				return
+    				this.$toast('此功能暂未开发');
+    				return;
     			} else {
     				this.$router.push({path: '/'+ to});
     			}

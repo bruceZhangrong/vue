@@ -97,6 +97,9 @@ $defaultMargin: 0 10%;
 .color-fff {
     color: $colorfff;
 }
+.color-liked {
+  color: #f60;
+}
 .bg-topic {
     background-color: #53cac4;
 }
@@ -317,6 +320,9 @@ body {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     flex: 1;
+    &::-webkit-scrollbar {
+      width: 0; 
+    }
 }
 .home-head-fa {
     line-height: 40px;

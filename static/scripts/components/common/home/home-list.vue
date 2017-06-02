@@ -20,8 +20,8 @@
                         :data-id="k"
                         :data-uid="v.uid"
                         ref="noFocus"
-                    ><i class="fa fa-plus"></i>收藏</div>
-                    <div v-else class="focus on">已收藏</div>
+                    ><i class="fa fa-plus"></i>关注</div>
+                    <div v-else class="focus on">已关注</div>
                 </div>
 			</div>
 			<div class="user-info">
@@ -129,7 +129,16 @@
 
 <script>
 	export default {
-		props:['loadDatas'],
+		props: {
+			loadDatas: {
+				type: Array,
+				default: []
+			},
+			apiType: {
+				type: String,
+				default: 'recommend'
+			}
+		},
 		data() {
 			return {
 				homeLists: [],
@@ -150,7 +159,7 @@
 						offset:0,
 						num:10,
 						uid:0,
-						type:`recommend`,
+						type: this.apiType,
 						published:0
 					},
 					success: res => {
@@ -182,7 +191,7 @@
 					}
 				});
 			}
-			console.log('created',this.noFocused);
+			// console.log('created',this.noFocused);
 		},
 		mounted() {
 		},
@@ -214,7 +223,7 @@
                 this.API({
                     select_type: '',
                     noLoading: true,
-                    url: this.URL.MY_FAVORITE,
+                    url: this.URL.USER_FOCUS,
                     datas: {
                         uid: uid
                     },
@@ -240,7 +249,7 @@
 				let uid = e.target.getAttribute('data-uid');
 				let focused = 0;
 				for( let i = 0; i < this.allUid.length; i ++) {
-					if(uid == this.allUid[i]) {
+					if(this.allUid[i]) {
 						focused = 1;
 					}
 				}

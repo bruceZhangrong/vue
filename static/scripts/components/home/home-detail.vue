@@ -9,8 +9,15 @@
                         v-if="!attentioned" 
                         class="attention"
                         @click="attentionIt"
-                    ><i class="fa fa-plus"></i>收藏</div>
-                    <div v-else class="attention on">已收藏</div>
+                    ><i class="fa fa-plus"></i>关注</div>
+                    <div v-else class="attention on">已关注</div>
+                </div>
+                <div class="like-wrapper">
+                    <div class="like" @click="cancelFavorite">
+                        <i 
+                            :class="`fa ${!!homeDetails.islikeed ? 'color-liked fa-heart' : 'fa-heart-o'}`"
+                        ></i>
+                    </div>
                 </div>
             </div>
             <div class="second-title">
@@ -38,10 +45,13 @@
             font-size: 18px;
             display: flex;
             .title-left {
-                flex: 3;
+                flex: 5;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
             .attention-wrapper {
-                flex: 1;
+                flex: 2;
                 .attention {
                     width: 54px;
                     border: 1px solid #ccc;
@@ -59,6 +69,10 @@
                         color: #999;
                     }
                 }
+            }
+            .like-wrapper {
+                text-align: right;
+                flex: 1;
             }
         }
         .second-title {
@@ -105,10 +119,12 @@
 
 <script>
     import vHeader from '../header/header'; 
+    import { MessageBox } from 'mint-ui';
 
     export default {
         components: {
-            vHeader
+            vHeader,
+            MessageBox
         },
         data() {
             return {
@@ -154,13 +170,13 @@
         },
         methods: {
             goBack() {
-                this.$router.replace({path: '/home'});
+                this.$router.back();
             },
             attentionIt() {
                 this.uid = this.$route.query.uid;
                 this.API({
                     select_type: '',
-                    url: this.URL.MY_FAVORITE,
+                    url: this.URL.USER_FOCUS,
                     datas: {
                         uid: this.uid
                     },
@@ -172,6 +188,24 @@
                     error: res => {
                         this.$toast(res)
                     }
+                })
+            },
+            cancelFavorite() {
+                let that = this;
+                MessageBox.confirm('你确定取消收藏此作品？').then( () => {
+                    this.API({
+                        select_type: '',
+                        url: this.URL.CANCEL_FAVORITE,
+                        datas: {
+                            nid: this.nid
+                        },
+                        success: res => {
+                            that.$router.back();
+                        },
+                        error: res => {
+                            this.$toast(res)
+                        }
+                    });
                 })
             }
         }

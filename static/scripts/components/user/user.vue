@@ -48,13 +48,13 @@
 						classIcon: `file-text-o`,
 						title:`简历`,
 						rightTip:`完整度：0%`,
-						to: 'resume'
+						// to: 'resume'
 					},
 					{
 						classIcon: `print`,
 						title:`机会+`,
 						rightTip:`去开启`,
-						to: 'change'
+						// to: 'change'
 					}
 				],
 				secondDatas: [
@@ -66,7 +66,7 @@
 					{
 						classIcon: `reply-all`,
 						title:`意见反馈`,
-						to: 'feetback'
+						// to: 'feetback'
 					},
 					{
 						classIcon: `cog`,
@@ -94,7 +94,6 @@
     			this.$parent.navShow = true;
     		},
     		outLogin() {
-
     			window.localStorage.removeItem('token');
     			this.$router.push({path: '/login', query: {toPage: this.$route.path}})
     		},

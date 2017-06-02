@@ -12,8 +12,8 @@
 				</ul>
 			</section>
 			<HomeList 
-				@add-offset="addOffset" 
-				:load-datas="loadDatas"
+				@add-offset="addOffset"
+				:loadDatas="loadDatas"
 			></HomeList>
 		</div>
 		
@@ -49,7 +49,7 @@
 				scrollHeight: 210,
 				offset: 10,
 				num: 10,
-				loadDatas: [],
+				loadDatas: [], 
 				viewHeight: window.screen.availHeight,
 				mainNav: [
 					{clasIcon: 'money',title:'超级雇主'},
