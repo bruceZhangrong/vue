@@ -17,32 +17,13 @@
 					<span>{{v.content}}</span>
 				</div>
 			</div>
+		</div>
 
-			<div class="message-content">
-				<div class="msg-cont-cell cell-head">
-					<div class="msg-cont-img">
-						<img src="" alt="">
-					</div>
-					<div class="msg-cont-contain">
-						<strong>1234</strong>
-						<span>12345678987654</span>
-					</div>
-					<i class="msg-cont-time"></i>
-				</div>
-				<dvi 
-					class="msg-cont-cell"
-					v-for="(v, k) in companies"
-				>
-					<div class="msg-cont-img">
-						<img src="" alt="">
-					</div>
-					<div class="msg-cont-contain">
-						<strong>1234</strong>
-						<span>12345678987654</span>
-					</div>
-					<i class="pos-a msg-cont-time"></i>
-				</dvi>
-			</div>
+		<div class="msg-wrapper">
+			<!-- <msgCell
+				:partLeft=""
+				:partCenter="lookedMe"
+			></msgCell> -->
 		</div>
 	</div>
 </template>
@@ -60,8 +41,8 @@
 
 <script>
 	import vHeader from '../header/header';
+	// import msgCell from '../common/message/msg-cell';
 
-	
 	import '../../../styles/home/home.scss';
 	import '../../../styles/message/message.scss';
 	export default {
@@ -80,11 +61,16 @@
 						classIcon: `commenting-o`,
 						content: `言职通知`
 					}
-				]
+				],
+				lookedMe: {
+					title: '看过我的',
+					description: '暂无消息',
+				}
 			}
 		},
 		components: {
-			vHeader
+			vHeader,
+			// msgCell
 		},
 		created() {
 			this.$store.dispatch('changeHeader', {
