@@ -179,14 +179,14 @@
 						offset: 0
 					},
 					success: res => {
-						if(res.status_code == 203) {
-							this.$toast(res.message)
+						if(res.status_code == 200) {
+                            res.data.forEach(res => {
+                                that.allUid.push(res.uid);
+                            });
+                            console.log('focus',res)
+                            this.filterFocusLists();
 						} else {
-							res.data.forEach(res => {
-								that.allUid.push(res.uid);
-							});
-							console.log('focus',res)
-							this.filterFocusLists();
+                            this.$toast(res.message)
 						}
 					}
 				});

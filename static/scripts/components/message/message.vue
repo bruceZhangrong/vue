@@ -17,13 +17,23 @@
 					<span>{{v.content}}</span>
 				</div>
 			</div>
-		</div>
 
-		<div class="msg-wrapper">
-			<!-- <msgCell
-				:partLeft=""
-				:partCenter="lookedMe"
-			></msgCell> -->
+			<div class="msg-wrapper">
+				<MsgCell
+					:partLeft="lookedMeTitle"
+					:partCenter="lookedMe"
+				>
+					<i slot="msgCellRightIcon" class="fa fa-angle-right fa-2x arrow-right"></i>
+				</MsgCell>
+				<template v-for="(v,k) in allDialog">
+					<MsgCell
+						:partLeft="v.img"
+						:partCenter="v.content"
+					>
+						<i slot="msgCellRightIcon" class="dialog-time">{{v.time}}</i>
+					</MsgCell>
+				</template>
+			</div>
 		</div>
 	</div>
 </template>
@@ -36,18 +46,32 @@
 		color: #fff;
 		margin-top: 11px;
 	}
+	.arrow-right {
+		color: #ccc;
+		position: absolute;
+		top: 5px;
+		right: 20px;
+	}
+	.dialog-time {
+		font-style: normal;
+		color: #ccc;
+		font-size: 12px;
+		position: absolute;
+		top: 10px;
+		right: 20px;
+	}
 </style>
 
 
 <script>
 	import vHeader from '../header/header';
-	// import msgCell from '../common/message/msg-cell';
+	import MsgCell from '../common/message/msg-cell';
 
 	import '../../../styles/home/home.scss';
 	import '../../../styles/message/message.scss';
 	export default {
 		data() {
-			return  {
+			return {
 				messageHeads: [
 					{
 						classIcon: `file-text-o`,
@@ -64,21 +88,69 @@
 				],
 				lookedMe: {
 					title: '看过我的',
-					description: '暂无消息',
-				}
+					description: '暂无消息'
+				},
+				lookedMeTitle: `./static/images/main-nav03.png`,
+				allDialog: [
+					{
+						img: `./static/images/main-nav01.png`,
+						content: {
+							title: `one`,
+							description: `12345678`,
+						},
+						time: `2017-05-09`
+					},
+					{
+						img: `./static/images/main-nav02.png`,
+						content: {
+							title: `two`,
+							description: `12345678`,
+						},
+						time: `2017-05-10`
+					},
+					{
+						img: `./static/images/main-nav04.png`,
+						content: {
+							title: `three`,
+							description: `12345678`,
+						},
+						time: `2017-05-14`
+					},
+					{
+						img: `./static/images/main-nav02.png`,
+						content: {
+							title: `four`,
+							description: `12345678`,
+						},
+						time: `2017-05-20`
+					},
+					{
+						img: `./static/images/main-nav04.png`,
+						content: {
+							title: `five`,
+							description: `12345678`,
+						},
+						time: `2017-06-20`
+					},
+					{
+						img: `./static/images/main-nav01.png`,
+						content: {
+							title: `six`,
+							description: `12345678`,
+						},
+						time: `2017-06-22`
+					}
+				]
 			}
 		},
 		components: {
 			vHeader,
-			// msgCell
+			MsgCell,
 		},
 		created() {
 			this.$store.dispatch('changeHeader', {
 				bgColor: '#f8f8f8',
-				centerPart: `
-					<p class="msg-header full-screen text-center">消息列表</p>
-				`,
-
+				centerPart: `<p class="msg-header full-screen text-center">消息列表</p>`
 			})
 		},
 		mounted(){
