@@ -22,6 +22,7 @@
 				<MsgCell
 					:partLeft="lookedMeTitle"
 					:partCenter="lookedMe"
+					:alertmessage.sync="alertMessages"
 				>
 					<i slot="msgCellRightIcon" class="fa fa-angle-right fa-2x arrow-right"></i>
 				</MsgCell>
@@ -159,6 +160,10 @@
     	methods: {
     		init() {
     			this.$parent.navShow = true;
+    		},
+    		alertMessages() {
+    			console.log('alert-message');
+    			this.$toast('你点了我！')
     		}
      	}
 	}

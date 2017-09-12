@@ -1,5 +1,5 @@
 <template>
-    <div class="msg-cell">
+    <div class="msg-cell" @click="clicklist">
         <div class="msg-cell-left">
             <img :src="partLeft" />
         </div>
@@ -62,6 +62,12 @@
     data() {
         return {
             partLeft: ''
+        }
+    },
+    methods: {
+        clicklist() {
+            console.log(123)
+            this.$emit('update:alertmessage');
         }
     }
 }
