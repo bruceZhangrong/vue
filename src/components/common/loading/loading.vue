@@ -1,7 +1,7 @@
 <template>
 	<div class="loading" v-if="loading.isLoading">
 		<div class="loading-bg vertical-center">
-			<img src="assets/images/loading.png" alt="">
+			<img src="src/assets/images/loading.png" alt="">
 		</div>
 	</div>
 </template>

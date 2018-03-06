@@ -12,7 +12,8 @@ module.exports =  {
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
-        filename: '[name]-[chunkhash].js'
+        // filename: '[name]-[chunkhash].js'
+        filename: 'bundle.js'
     },
     resolve: {
         modules: [
@@ -47,15 +48,15 @@ module.exports =  {
         new webpack.LoaderOptionsPlugin({
             minimize: true
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: function(module) {
-                return module.context && module.context.indexOf('node_modules') !== -1;
-            }
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest'
-        })
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'vendor',
+        //     minChunks: function(module) {
+        //         return module.context && module.context.indexOf('node_modules') !== -1;
+        //     }
+        // }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'manifest'
+        // })
     ],
     devtool: 'false',
     resolveLoader: {
